@@ -1,14 +1,28 @@
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Resume from "./components/Resume";
-import Contact from "./components/Contact";
+import { useEffect, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import LoadingScreen from './components/LoadingScreen'
+import Navbar from './components/Navbar'
+import Home from './components/Home'
+import About from './components/About'
+import Skills from './components/Skills'
+import Projects from './components/Projects'
+import Resume from './components/Resume'
+import Contact from './components/Contact'
 
 function App() {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2400)
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
-    <div className="bg-black">
+    <>
+      <AnimatePresence>
+        {loading && <LoadingScreen />}
+      </AnimatePresence>
+
       <Navbar />
       <Home />
       <About />
@@ -16,8 +30,8 @@ function App() {
       <Projects />
       <Resume />
       <Contact />
-    </div>
-  );
+    </>
+  )
 }
 
-export default App;
+export default App

@@ -3,6 +3,7 @@ import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { FaReact, FaNodeJs, FaJava } from "react-icons/fa";
 import { SiMongodb, SiPython, SiFlutter, SiFlask, SiJavascript, SiTypescript } from "react-icons/si";
 import OrbitIcons, { OrbitItem } from "./OrbitIcons";
+import TypedRole from './TypedRole'
 
 const innerRing: OrbitItem[] = [
   { icon: <FaReact className="text-cyan-400 text-4xl" />, glow: "#00e5ff" },
@@ -137,13 +138,9 @@ function Home() {
             DEEPAK
           </motion.h1>
 
-          <motion.h2
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="text-xl md:text-4xl text-cyan-400 font-bold mt-4"
-          >
-            FULL STACK DEVELOPER
-          </motion.h2>
+<div className="text-2xl md:text-3xl font-bold uppercase tracking-wide mt-2">
+  <TypedRole />
+</div>
         </div>
       </motion.div>
     </section>
