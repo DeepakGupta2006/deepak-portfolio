@@ -28,7 +28,7 @@ const projects: Project[] = [
     tech: "ReactJS • MongoDB • Express • NodeJS",
     image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
     description:
-      "Full-stack food ordering application with authentication, cart management, Stripe payments and admin dashboard.",
+      "Full-stack food ordering application with authentication, cart management,  and admin dashboard.",
     icon: <FaReact className="text-cyan-400 text-5xl" />,
     glow: "#00e5ff",
   },
