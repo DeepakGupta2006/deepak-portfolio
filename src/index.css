@@ -1,31 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-obsidian: #050811;
+  --accent-cyan: #06b6d4;
+  --accent-indigo: #6366f1;
+  --accent-violet: #8b5cf6;
+}
+
 html {
   scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+  color-scheme: dark;
 }
 
 body {
-  background: #000;
+  background-color: var(--bg-obsidian);
+  color: #f8fafc;
   overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(6, 182, 212, 0.3);
+  color: #22d3ee;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Subtle Cyber Grid Background */
+.bg-cyber-grid {
+  background-size: 45px 45px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+}
+
+/* Glassmorphism Card Utility */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.25), 0 0 15px -5px rgba(99, 102, 241, 0.2);
+}
+
+/* Gradient Text Utility */
+.text-gradient-cyber {
+  background: linear-gradient(135deg, #22d3ee 0%, #818cf8 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Floating photo animation used in About */
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-18px);
+    transform: translateY(-16px) rotate(1deg);
   }
 }
+
 .float-animation {
-  animation: float 4s ease-in-out infinite;
+  animation: float 5s ease-in-out infinite;
 }
 
-/* Utility perspective classes (in case Tailwind arbitrary values aren't enough) */
+/* Utility perspective classes */
 .perspective-1000 {
   perspective: 1000px;
 }
@@ -33,14 +88,17 @@ body {
   transform-style: preserve-3d;
 }
 
-/* Custom cyan scrollbar to match theme */
+/* Custom Gradient Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: #050811;
 }
 ::-webkit-scrollbar-thumb {
-  background: #0891b2;
+  background: linear-gradient(180deg, #06b6d4, #6366f1);
   border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #22d3ee, #818cf8);
 }

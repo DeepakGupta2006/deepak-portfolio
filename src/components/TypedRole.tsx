@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 const ROLES = [
-  'full Stack Developer',
+  'Full Stack Developer',
   'Software Developer',
   'AI Developer',
   'DSA Enthusiast',
@@ -15,7 +15,7 @@ export default function TypedRole() {
   useEffect(() => {
     const current = ROLES[roleIndex]
     const isPausing = !deleting && text === current
-    const speed = isPausing ? 1400 : deleting ? 35 : 60
+    const speed = isPausing ? 1500 : deleting ? 35 : 65
 
     const timeout = setTimeout(() => {
       if (isPausing) {
@@ -34,9 +34,12 @@ export default function TypedRole() {
   }, [text, deleting, roleIndex])
 
   return (
-    <span className="text-cyan-soft">
-      {text}
-      <span className="ml-0.5 inline-block w-[2px] animate-blink bg-cyan-soft align-middle h-[0.9em]" />
+    <span className="inline-flex items-center font-mono">
+      <span className="mr-2 text-indigo-400 font-normal">&gt;</span>
+      <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]">
+        {text}
+      </span>
+      <span className="ml-1 inline-block w-[2.5px] h-[0.95em] bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]" />
     </span>
   )
 }

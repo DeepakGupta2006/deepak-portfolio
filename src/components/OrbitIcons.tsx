@@ -3,22 +3,17 @@ import { ReactNode } from "react";
 
 export interface OrbitItem {
   icon: ReactNode;
-  glow: string; // hex/css color used for the drop-shadow glow
+  glow: string;
 }
 
 interface OrbitIconsProps {
   items: OrbitItem[];
-  radius?: number; // distance from center in px
-  duration?: number; // seconds per full revolution
-  reverse?: boolean; // spin direction
-  iconSize?: number; // px, wrapper box size for each icon
+  radius?: number;
+  duration?: number;
+  reverse?: boolean;
+  iconSize?: number;
 }
 
-/**
- * Places `items` evenly around a circle of `radius` px and spins the whole
- * ring forever. Each icon is counter-rotated at the same speed so it stays
- * upright while it travels around the ring, instead of spinning in place.
- */
 function OrbitIcons({
   items,
   radius = 260,
@@ -30,7 +25,7 @@ function OrbitIcons({
 
   return (
     <motion.div
-      className="absolute top-1/2 left-1/2"
+      className="absolute top-1/2 left-1/2 pointer-events-none"
       style={{ width: 0, height: 0 }}
       animate={{ rotate: direction }}
       transition={{ repeat: Infinity, duration, ease: "linear" }}
@@ -46,20 +41,24 @@ function OrbitIcons({
               transform: `rotate(${angle}deg) translate(${radius}px) rotate(${-angle}deg)`,
             }}
           >
-            {/* counter-rotate the icon itself so it never appears upside down */}
+            {/* Counter-rotate the glass orb so the icon stays upright */}
             <motion.div
               animate={{ rotate: -direction }}
               transition={{ repeat: Infinity, duration, ease: "linear" }}
-              className="flex items-center justify-center"
+              whileHover={{ scale: 1.2 }}
+              className="pointer-events-auto flex items-center justify-center rounded-2xl bg-slate-900/75 backdrop-blur-md border border-white/10 transition-shadow duration-300"
               style={{
                 width: iconSize,
                 height: iconSize,
                 marginLeft: -iconSize / 2,
                 marginTop: -iconSize / 2,
-                filter: `drop-shadow(0 0 12px ${item.glow})`,
+                boxShadow: `0 0 22px -4px ${item.glow}55, inset 0 0 12px ${item.glow}22`,
+                borderColor: `${item.glow}40`,
               }}
             >
-              {item.icon}
+              <div style={{ filter: `drop-shadow(0 0 8px ${item.glow}99)` }}>
+                {item.icon}
+              </div>
             </motion.div>
           </div>
         );
