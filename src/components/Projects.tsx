@@ -8,9 +8,12 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { FaJava, FaReact, FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import { SiPython } from "react-icons/si";
+import { SiFoodpanda, SiIfood, SiPython } from "react-icons/si";
 import { BiSolidHotel } from "react-icons/bi";
 import { HiSparkles, HiOutlineSquares2X2, HiOutlineGlobeAlt, HiXMark } from "react-icons/hi2";
+import { FaShopSlash } from "react-icons/fa6";
+import { FaShoppingCart } from "react-icons/fa";
+import { GiMeal } from "react-icons/gi";
 
 interface Project {
   title: string;
@@ -32,11 +35,10 @@ const projects: Project[] = [
       "Full-stack food ordering platform featuring user authentication, dynamic cart management, Stripe payment gateway integration, and a real-time admin order dashboard.",
     highlights: [
       "JWT Authentication & Role-based Admin Panel",
-      "Stripe Checkout & Live Order Status Tracking",
       "RESTful API with Express & MongoDB Atlas",
     ],
-    icon: <FaReact className="text-cyan-400 text-4xl" />,
-    glow: "#06b6d4",
+    icon: <GiMeal className="text-[#F97316] text-4xl" />,
+    glow: "#F97316",
     github: "https://github.com/DeepakGupta2006",
   },
   {
@@ -55,18 +57,20 @@ const projects: Project[] = [
     github: "https://github.com/DeepakGupta2006",
   },
   {
-    title: "Snake Game Engine",
-    tech: ["Java", "Swing GUI", "AWT", "OOP"],
-    image: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=1000&q=80",
+    title: "NextCart: Full-Stack E-Commerce Platform",
+    tech: ["React", "Vite", "Tailwind CSS", "Node.js", "Express", "MongoDB", "JWT", "Razorpay", "Cloudinary"],
+    image: "/nextcart.png",
     description:
-      "Classic arcade Snake game built entirely in core Java Swing featuring 60FPS game-loop timers, real-time collision detection, and dynamic difficulty scaling.",
+      "Full-stack MERN fashion store with JWT auth, a per-user persistent cart, Razorpay payments verified server-side via HMAC signatures, Cloudinary image uploads, and an admin dashboard for managing products, orders, and users.",
     highlights: [
-      "Custom 2D Rendering & Keyboard Event Listener",
-      "Dynamic Speed Scaling & High-Score Persistence",
-      "Zero External Dependencies — Pure Core Java",
+      "Server-Verified Razorpay Payments via HMAC-SHA256 Signatures",
+      "JWT Auth, Role-Based Admin Dashboard & Persistent User Carts",
+      "Direct Cloudinary Image Uploads Streamed from Memory (No Local Disk)",
+      "Search, Filter & Sort Across Men, Women, Kids & Accessories",
+      "Deployed Full-Stack: React on Vercel, Express API on Render, MongoDB Atlas",
     ],
-    icon: <FaJava className="text-rose-500 text-4xl" />,
-    glow: "#f43f5e",
+    icon: <FaShoppingCart className="text-[#5D8F87] text-4xl" />,
+    glow: "#5D8F87",
     github: "https://github.com/DeepakGupta2006",
   },
   {
