@@ -29,7 +29,7 @@ interface Project {
 const projects: Project[] = [
   {
     title: "Food Delivery App",
-    tech: ["React.js", "MongoDB", "Express", "Node.js", "Stripe"],
+    tech: ["React.js", "MongoDB", "Express", "Node.js"],
     image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1000&q=80",
     description:
       "Full-stack food ordering platform featuring user authentication, dynamic cart management, Stripe payment gateway integration, and a real-time admin order dashboard.",
