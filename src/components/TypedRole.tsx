@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 const ROLES = [
   'Full Stack Developer',
   'Software Developer',
-  'AI Developer',
-  'DSA Enthusiast',
+  'AI/ML',
+  'Mern Stack Developer',
 ]
 
 export default function TypedRole() {

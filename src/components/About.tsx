@@ -131,7 +131,7 @@ function About() {
               Hi, I'm <span className="text-white font-semibold">Deepak R. Gupta</span>, a
               Full-Stack & Software Developer pursuing my{" "}
               <span className="text-cyan-300 font-medium">
-                Bachelor of Computer Applications (BCA)
+                Bachelor of Computer Applications (BCA)-Computer Science
               </span>{" "}
               at Tilak Maharashtra Vidyapeeth, Pune University.
             </p>

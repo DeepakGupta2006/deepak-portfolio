@@ -7,7 +7,7 @@ import {
   useAnimationFrame,
   AnimatePresence,
 } from "framer-motion";
-import { FaJava, FaReact, FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaJava, FaReact, FaGithub, FaExternalLinkAlt, FaNewspaper } from "react-icons/fa";
 import { SiFoodpanda, SiIfood, SiPython } from "react-icons/si";
 import { BiSolidHotel } from "react-icons/bi";
 import { HiSparkles, HiOutlineSquares2X2, HiOutlineGlobeAlt, HiXMark } from "react-icons/hi2";
@@ -41,6 +41,22 @@ const projects: Project[] = [
     glow: "#F97316",
     github: "https://github.com/DeepakGupta2006",
   },
+
+   {
+    title: "Fake News Detector",
+  tech: ["Python", "Flask", "scikit-learn", "Pandas"],
+ image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1000&q=80",
+  description:
+    "Full-stack ML web app that classifies news text as Real or Fake with a confidence score, trained on 39,000+ real articles with a data-leakage bug found and fixed during development, achieving 98.4% measured accuracy.",
+  highlights: [
+    "TF-IDF + Logistic Regression Classifier (98.4% Accuracy)",
+    "Flask REST API with /predict & /health Endpoints",
+  ],
+  icon: <FaNewspaper className="text-[#3B82F6] text-4xl" />,
+  glow: "#3B82F6",
+    github: "https://github.com/DeepakGupta2006",
+  },
+
   {
     title: "Hotel Reservation",
     tech: ["Java", "MySQL", "JDBC", "OOP"],
