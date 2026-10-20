@@ -39,7 +39,7 @@ const projects: Project[] = [
     ],
     icon: <GiMeal className="text-[#F97316] text-4xl" />,
     glow: "#F97316",
-    github: "https://github.com/DeepakGupta2006",
+    github: "https://github.com/DeepakGupta2006/food-del",
   },
 
    {
@@ -54,7 +54,7 @@ const projects: Project[] = [
   ],
   icon: <FaNewspaper className="text-[#3B82F6] text-4xl" />,
   glow: "#3B82F6",
-    github: "https://github.com/DeepakGupta2006",
+    github: "https://github.com/DeepakGupta2006/fake-news-detector",
   },
 
   {
@@ -70,7 +70,7 @@ const projects: Project[] = [
     ],
     icon: <BiSolidHotel className="text-amber-400 text-4xl" />,
     glow: "#f59e0b",
-    github: "https://github.com/DeepakGupta2006",
+    github: "https://github.com/DeepakGupta2006/hotelreservation",
   },
   {
     title: "NextCart: Full-Stack E-Commerce Platform",
@@ -87,7 +87,7 @@ const projects: Project[] = [
     ],
     icon: <FaShoppingCart className="text-[#5D8F87] text-4xl" />,
     glow: "#5D8F87",
-    github: "https://github.com/DeepakGupta2006",
+    github: "https://github.com/DeepakGupta2006/NextCart",
   },
   {
     title: "AI Resume Matcher",
@@ -102,7 +102,7 @@ const projects: Project[] = [
     ],
     icon: <SiPython className="text-sky-400 text-4xl" />,
     glow: "#38bdf8",
-    github: "https://github.com/DeepakGupta2006",
+    github: "https://github.com/DeepakGupta2006/resume-matcher",
   },
 ];
 
