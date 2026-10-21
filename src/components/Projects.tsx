@@ -7,13 +7,14 @@ import {
   useAnimationFrame,
   AnimatePresence,
 } from "framer-motion";
-import { FaJava, FaReact, FaGithub, FaExternalLinkAlt, FaNewspaper } from "react-icons/fa";
+import { FaJava, FaReact, FaGithub, FaExternalLinkAlt, FaNewspaper,} from "react-icons/fa";
 import { SiFoodpanda, SiIfood, SiPython } from "react-icons/si";
 import { BiSolidHotel } from "react-icons/bi";
 import { HiSparkles, HiOutlineSquares2X2, HiOutlineGlobeAlt, HiXMark } from "react-icons/hi2";
 import { FaShopSlash } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import { GiMeal } from "react-icons/gi";
+import { LuFileSearch } from "react-icons/lu";
 
 interface Project {
   title: string;
@@ -92,7 +93,7 @@ const projects: Project[] = [
   {
     title: "AI Resume Matcher",
     tech: ["Python", "Streamlit", "PDFPlumber", "NLP"],
-    image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=1000&q=80",
+    image: "/resume-matcher-banner.png",
     description:
       "Intelligent NLP web application that parses candidate PDF resumes and evaluates keyword, skill, and semantic alignment against target job descriptions.",
     highlights: [
@@ -100,7 +101,7 @@ const projects: Project[] = [
       "Cosine Similarity & Keyword Gap Analysis",
       "Interactive Streamlit Dashboard with Match Score",
     ],
-    icon: <SiPython className="text-sky-400 text-4xl" />,
+    icon: <LuFileSearch className="text-sky-400 text-4xl" />,
     glow: "#38bdf8",
     github: "https://github.com/DeepakGupta2006/resume-matcher",
   },
