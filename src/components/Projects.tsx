@@ -62,7 +62,7 @@ const projects: Project[] = [
     tech: ["Java", "MySQL", "JDBC", "OOP"],
     image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1000&q=80",
     description:
-      "Relational hotel booking & management system supporting room availability checks, reservation scheduling, billing, and customer record management.",
+      "Relational hotel booking & management system supporting room availability checks, reservation scheduling, billing, and customer record management A database-driven hotel reservation application developed to manage guest information and hotel booking records efficiently..",
     highlights: [
       "Normalized MySQL Schema with JDBC Connectivity",
       "Automated Room Allocation & Check-in/Check-out",
