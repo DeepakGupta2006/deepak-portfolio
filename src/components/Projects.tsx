@@ -7,7 +7,7 @@ import {
   useAnimationFrame,
   AnimatePresence,
 } from "framer-motion";
-import { FaJava, FaReact, FaGithub, FaExternalLinkAlt, FaNewspaper,} from "react-icons/fa";
+import { FaJava, FaReact, FaGithub, FaExternalLinkAlt, FaNewspaper, FaRobot,} from "react-icons/fa";
 import { SiFoodpanda, SiIfood, SiPython } from "react-icons/si";
 import { BiSolidHotel } from "react-icons/bi";
 import { HiSparkles, HiOutlineSquares2X2, HiOutlineGlobeAlt, HiXMark } from "react-icons/hi2";
@@ -57,7 +57,20 @@ const projects: Project[] = [
   glow: "#3B82F6",
     github: "https://github.com/DeepakGupta2006/fake-news-detector",
   },
-
+  {
+  title: "AI Voice Assistant",
+  tech: ["Python", "Faster-Whisper", "Ollama", "Flask", "sounddevice", "psutil"],
+  image: "/AI-Brain.jpeg",
+  description:
+    "Private Human style Voice Assistant for Windows that runs fully on your own PC. Say Friday or Jarvis to open apps, control the system, message contacts on WhatsApp and look up Wikipedia and news, with no cloud AI, API keys or GPU.",
+  highlights: [
+    "Faster-Whisper speech-to-text + local Ollama LLM + Piper neural voice, streamed sentence by sentence",
+    "Rule-based command router with wake word, interruptible speech and confirmation before risky actions",
+  ],
+  icon: <FaRobot className="text-[#38E1FF] text-4xl" />,
+  glow: "#38E1FF",
+  github: "https://github.com/DeepakGupta2006/friday",
+},
   {
     title: "Hotel Reservation",
     tech: ["Java", "MySQL", "JDBC", "OOP"],
