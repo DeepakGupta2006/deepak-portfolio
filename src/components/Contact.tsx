@@ -46,7 +46,7 @@ const cards: ContactCard[] = [
     external: true,
   },
   {
-    href: "https://linkedin.com/in/deepakgupta",
+    href: "https://www.linkedin.com/in/deepak-gupta-821945296",
     glow: "#3b82f6",
     icon: <FaLinkedin className="text-blue-400 text-2xl" />,
     title: "LinkedIn",
