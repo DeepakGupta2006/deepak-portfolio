@@ -7,7 +7,7 @@ import {
   useAnimationFrame,
   AnimatePresence,
 } from "framer-motion";
-import { FaJava, FaReact, FaGithub, FaExternalLinkAlt, FaNewspaper, FaRobot,} from "react-icons/fa";
+import { FaJava, FaReact, FaGithub, FaExternalLinkAlt, FaNewspaper, FaRobot, FaUserShield,} from "react-icons/fa";
 import { SiFoodpanda, SiIfood, SiPython } from "react-icons/si";
 import { BiSolidHotel } from "react-icons/bi";
 import { HiSparkles, HiOutlineSquares2X2, HiOutlineGlobeAlt, HiXMark } from "react-icons/hi2";
@@ -41,7 +41,24 @@ const projects: Project[] = [
     icon: <GiMeal className="text-[#F97316] text-4xl" />,
     glow: "#F97316",
     github: "https://github.com/DeepakGupta2006/food-del",
-  },
+ },
+
+ {
+    title: "AI Resume Matcher",
+    tech: ["Python", "Streamlit", "PDFPlumber", "NLP"],
+    image: "/resume-matcher-banner.png",
+    description:
+      "Intelligent NLP web application that parses candidate PDF resumes and evaluates keyword, skill, and semantic alignment against target job descriptions.",
+    highlights: [
+      "Automated PDF Text Extraction via PDFPlumber",
+      "Cosine Similarity & Keyword Gap Analysis",
+      "Interactive Streamlit Dashboard with Match Score",
+    ],
+    icon: <LuFileSearch className="text-sky-400 text-4xl" />,
+    glow: "#38bdf8",
+    github: "https://github.com/DeepakGupta2006/resume-matcher",
+},
+  
 
    {
     title: "Fake News Detector",
@@ -53,10 +70,11 @@ const projects: Project[] = [
     "TF-IDF + Logistic Regression Classifier (98.4% Accuracy)",
     "Flask REST API with /predict & /health Endpoints",
   ],
-  icon: <FaNewspaper className="text-[#3B82F6] text-4xl" />,
-  glow: "#3B82F6",
+  icon: <FaNewspaper className="text-[#cdcdcd] text-4xl" />,
+  glow: "#cdcdcd",
     github: "https://github.com/DeepakGupta2006/fake-news-detector",
-  },
+},
+
   {
   title: "AI Voice Assistant",
   tech: ["Python", "Faster-Whisper", "Ollama", "Flask", "sounddevice", "psutil"],
@@ -71,6 +89,7 @@ const projects: Project[] = [
   glow: "#38E1FF",
   github: "https://github.com/DeepakGupta2006/friday",
 },
+
   {
     title: "Hotel Reservation",
     tech: ["Java", "MySQL", "JDBC", "OOP"],
@@ -85,7 +104,8 @@ const projects: Project[] = [
     icon: <BiSolidHotel className="text-amber-400 text-4xl" />,
     glow: "#f59e0b",
     github: "https://github.com/DeepakGupta2006/hotelreservation",
-  },
+},
+
   {
     title: "NextCart: Full-Stack E-Commerce Platform",
     tech: ["React", "Vite", "Tailwind CSS", "Node.js", "Express", "MongoDB", "JWT", "Razorpay", "Cloudinary"],
@@ -102,22 +122,24 @@ const projects: Project[] = [
     icon: <FaShoppingCart className="text-[#5D8F87] text-4xl" />,
     glow: "#5D8F87",
     github: "https://github.com/DeepakGupta2006/NextCart",
-  },
-  {
-    title: "AI Resume Matcher",
-    tech: ["Python", "Streamlit", "PDFPlumber", "NLP"],
-    image: "/resume-matcher-banner.png",
-    description:
-      "Intelligent NLP web application that parses candidate PDF resumes and evaluates keyword, skill, and semantic alignment against target job descriptions.",
-    highlights: [
-      "Automated PDF Text Extraction via PDFPlumber",
-      "Cosine Similarity & Keyword Gap Analysis",
-      "Interactive Streamlit Dashboard with Match Score",
-    ],
-    icon: <LuFileSearch className="text-sky-400 text-4xl" />,
-    glow: "#38bdf8",
-    github: "https://github.com/DeepakGupta2006/resume-matcher",
-  },
+},
+ 
+   {
+  title: "ZeroSpoof: Deepfake & Liveness Firewall",
+  tech: ["Python", "FastAPI", "Go", "Next.js", "TypeScript", "Redis", "PostgreSQL"],
+  image: "/ZeroSpoof.png",
+  description:
+    "Real-time deepfake and liveness firewall: a drop-in browser SDK and API that checks whether someone on a video call is a live human or a replay, photo, face-swap, virtual camera or cloned voice. Returns pass, review or fail with explainable scores and a live security dashboard.",
+  highlights: [
+    "Six detectors (pulse rPPG, moiré, device and stream integrity, random head-turn challenge, depth, audio) fused into a pass / review / fail verdict, with reasons shown for every result",
+    "Privacy-first: face tracking runs in the browser with WebAssembly, so raw video never leaves the device. Go WebSocket gateway, FastAPI inference, Redis session state, PostgreSQL hash-chained audit log and signed webhooks",
+  ],
+  icon: <FaUserShield className="text-[#4ADE80] text-4xl" />,
+  glow: "#4ADE80",
+  github: "https://github.com/DeepakGupta2006/ZeroSpoof",
+},
+
+  
 ];
 
 function ProjectCard({
