@@ -18,7 +18,7 @@ const education = [
   },
   {
     degree: "Higher Secondary Certificate (HSC - Class XII)",
-    school: "S.S. Sangh English Medium High School, Bhiwandi",
+    school: "BNN COLLEGE ,BHIWANDI",
     period: "2024",
     score: "Maharashtra State Board",
   },
@@ -106,7 +106,7 @@ function Resume() {
             {/* Action Buttons */}
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a
-                href="/Deepak_R.pdf"
+                href="/Deepak Raju Gupta Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900/90 border border-cyan-400/40 px-5 py-3.5 text-sm font-semibold text-cyan-300 hover:bg-cyan-500/15 hover:border-cyan-400 transition-all"
