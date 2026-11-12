@@ -46,7 +46,7 @@ function OrbitIcons({
               animate={{ rotate: -direction }}
               transition={{ repeat: Infinity, duration, ease: "linear" }}
               whileHover={{ scale: 1.2 }}
-              className="pointer-events-auto flex items-center justify-center rounded-2xl bg-slate-900/75 backdrop-blur-md border border-white/10 transition-shadow duration-300"
+              className="tile pointer-events-auto flex items-center justify-center rounded-2xl backdrop-blur-md transition-shadow duration-300"
               style={{
                 width: iconSize,
                 height: iconSize,

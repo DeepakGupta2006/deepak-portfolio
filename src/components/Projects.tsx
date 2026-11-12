@@ -70,8 +70,8 @@ const projects: Project[] = [
     "TF-IDF + Logistic Regression Classifier (98.4% Accuracy)",
     "Flask REST API with /predict & /health Endpoints",
   ],
-  icon: <FaNewspaper className="text-[#cdcdcd] text-4xl" />,
-  glow: "#cdcdcd",
+  icon: <FaNewspaper className="text-slate-400 text-4xl" />,
+  glow: "#94a3b8",
     github: "https://github.com/DeepakGupta2006/fake-news-detector",
 },
 
@@ -138,8 +138,6 @@ const projects: Project[] = [
   glow: "#4ADE80",
   github: "https://github.com/DeepakGupta2006/ZeroSpoof",
 },
-
-  
 ];
 
 function ProjectCard({
@@ -192,7 +190,7 @@ function ProjectCard({
           transformStyle: "preserve-3d",
           boxShadow: `0 10px 35px -10px ${project.glow}40`,
         }}
-        className="group relative rounded-2xl bg-slate-900/85 backdrop-blur-xl border border-white/10 hover:border-cyan-400/50 cursor-pointer transition-all duration-300 overflow-hidden"
+        className="card-solid glass-panel-hover group relative rounded-2xl cursor-pointer overflow-hidden"
       >
         {/* Top Image Banner */}
         <div className="relative h-32 w-full overflow-hidden">
@@ -201,7 +199,13 @@ function ProjectCard({
             alt={project.title}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to top, var(--img-fade) 0%, transparent 70%)",
+            }}
+          />
 
           {/* Floating Icon Badge */}
           <div
@@ -209,7 +213,7 @@ function ProjectCard({
               transform: "translateZ(30px)",
               boxShadow: `0 0 20px ${project.glow}55`,
             }}
-            className="absolute bottom-3 left-4 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/15"
+            className="tile absolute bottom-3 left-4 flex h-12 w-12 items-center justify-center rounded-xl backdrop-blur-md"
           >
             {project.icon}
           </div>
@@ -218,14 +222,14 @@ function ProjectCard({
         {/* Content */}
         <div className="p-5 text-left">
           <h3
-            className="font-display text-lg font-bold text-white group-hover:text-cyan-300 transition-colors"
+            className="font-display text-lg font-bold t-text group-hover:text-cyan-500 transition-colors"
             style={{ transform: "translateZ(24px)" }}
           >
             {project.title}
           </h3>
 
           {!compact && (
-            <p className="mt-2 text-sm text-slate-400 line-clamp-2">
+            <p className="mt-2 text-sm t-muted line-clamp-2">
               {project.description}
             </p>
           )}
@@ -238,14 +242,14 @@ function ProjectCard({
             {project.tech.slice(0, compact ? 3 : 5).map((t) => (
               <span
                 key={t}
-                className="rounded-md bg-slate-800/90 border border-white/10 px-2 py-0.5 font-mono text-[10px] text-cyan-300"
+                className="tile t-accent rounded-md px-2 py-0.5 font-mono text-[10px]"
               >
                 {t}
               </span>
             ))}
           </div>
 
-          <div className="mt-4 flex items-center justify-between text-xs font-mono text-slate-400 group-hover:text-cyan-400 transition-colors">
+          <div className="mt-4 flex items-center justify-between text-xs font-mono t-muted group-hover:text-cyan-500 transition-colors">
             <span>Click to inspect</span>
             <span>→</span>
           </div>
@@ -324,27 +328,27 @@ function Projects() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 px-3.5 py-1 text-xs font-mono uppercase tracking-widest text-cyan-300 mb-3">
-              <HiSparkles className="text-cyan-400" />
+            <div className="chip inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-mono uppercase tracking-widest mb-3">
+              <HiSparkles />
               <span>Featured Work</span>
             </div>
-            <h2 className="font-display text-4xl sm:text-5xl font-bold text-white">
+            <h2 className="font-display text-4xl sm:text-5xl font-bold t-text">
                interactive <span className="text-gradient-cyber">Projects</span>
             </h2>
-            <p className="mt-2 text-slate-400 text-sm sm:text-base max-w-xl">
+            <p className="mt-2 t-muted text-sm sm:text-base max-w-xl">
               Hover to pause the orbital ring or switch to Grid View. Click any card to
               inspect architecture and tech stack details.
             </p>
           </div>
 
           {/* Orbit vs Grid View Switcher (Desktop) */}
-          <div className="hidden md:inline-flex items-center rounded-full bg-slate-900/80 border border-white/10 p-1 self-start">
+          <div className="glass hidden md:inline-flex items-center rounded-full p-1 self-start">
             <button
               onClick={() => setViewMode("orbit")}
               className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
                 viewMode === "orbit"
-                  ? "bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]"
-                  : "text-slate-400 hover:text-white"
+                  ? "btn-grad shadow-[0_0_15px_rgba(6,182,212,0.4)]"
+                  : "t-muted hover:opacity-80"
               }`}
             >
               <HiOutlineGlobeAlt className="text-sm" />
@@ -354,8 +358,8 @@ function Projects() {
               onClick={() => setViewMode("grid")}
               className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
                 viewMode === "grid"
-                  ? "bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]"
-                  : "text-slate-400 hover:text-white"
+                  ? "btn-grad shadow-[0_0_15px_rgba(6,182,212,0.4)]"
+                  : "t-muted hover:opacity-80"
               }`}
             >
               <HiOutlineSquares2X2 className="text-sm" />
@@ -416,7 +420,7 @@ function Projects() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-md flex justify-center items-center z-[70] p-4"
+            className="fixed inset-0 bg-black/70 backdrop-blur-md flex justify-center items-center z-[70] p-4"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
@@ -425,12 +429,12 @@ function Projects() {
               exit={{ scale: 0.92, opacity: 0, y: 20 }}
               transition={{ type: "spring", stiffness: 280, damping: 24 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative bg-[#0b1120] rounded-3xl overflow-hidden max-w-2xl w-full border border-cyan-500/40 shadow-[0_0_50px_-10px_rgba(6,182,212,0.45)]"
+              className="modal-surface relative rounded-3xl overflow-hidden max-w-2xl w-full border border-cyan-500/40 shadow-[0_0_50px_-10px_rgba(6,182,212,0.45)]"
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/80 border border-white/15 text-slate-300 hover:text-white hover:border-cyan-400 transition"
+                className="on-dark absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 border border-white/20 hover:border-cyan-400 transition"
               >
                 <HiXMark className="text-xl" />
               </button>
@@ -442,16 +446,22 @@ function Projects() {
                   alt={selectedProject.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-[#0b1120]/40 to-transparent" />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to top, var(--modal) 0%, transparent 70%)",
+                  }}
+                />
                 <div className="absolute bottom-4 left-6 flex items-center gap-3">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900/90 backdrop-blur-md border border-white/15">
+                  <div className="tile flex h-14 w-14 items-center justify-center rounded-2xl backdrop-blur-md">
                     {selectedProject.icon}
                   </div>
                   <div>
-                    <span className="font-mono text-xs uppercase tracking-widest text-cyan-400">
+                    <span className="font-mono text-xs uppercase tracking-widest t-accent">
                       Project Spotlight
                     </span>
-                    <h3 className="font-display text-3xl font-bold text-white">
+                    <h3 className="font-display text-3xl font-bold t-text">
                       {selectedProject.title}
                     </h3>
                   </div>
@@ -464,26 +474,26 @@ function Projects() {
                   {selectedProject.tech.map((t) => (
                     <span
                       key={t}
-                      className="rounded-full bg-cyan-500/10 border border-cyan-500/30 px-3 py-1 font-mono text-xs text-cyan-300"
+                      className="chip rounded-full px-3 py-1 font-mono text-xs"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <p className="text-slate-300 leading-relaxed text-base">
+                <p className="t-muted leading-relaxed text-base">
                   {selectedProject.description}
                 </p>
 
                 {/* Key Highlights */}
-                <div className="mt-5 rounded-2xl bg-slate-900/70 border border-white/10 p-4">
-                  <p className="font-mono text-xs uppercase tracking-wider text-indigo-300 mb-2.5">
+                <div className="tile mt-5 rounded-2xl p-4">
+                  <p className="font-mono text-xs uppercase tracking-wider t-accent3 mb-2.5">
                     Key Engineering Highlights
                   </p>
-                  <ul className="space-y-2 text-sm text-slate-300">
+                  <ul className="space-y-2 text-sm t-muted">
                     {selectedProject.highlights.map((item, idx) => (
                       <li key={idx} className="flex items-start gap-2">
-                        <span className="text-cyan-400 mt-0.5">▹</span>
+                        <span className="t-accent mt-0.5">▹</span>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -497,7 +507,7 @@ function Projects() {
                       href={selectedProject.github}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-105 transition"
+                      className="btn-grad inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-105 transition"
                     >
                       <FaGithub className="text-lg" />
                       <span>View on GitHub</span>
@@ -507,7 +517,7 @@ function Projects() {
 
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="rounded-full bg-slate-800/90 border border-white/10 px-6 py-2.5 text-sm font-medium text-slate-300 hover:text-white hover:border-white/30 transition"
+                    className="glass t-muted rounded-full px-6 py-2.5 text-sm font-medium hover:opacity-80 transition"
                   >
                     Close Window
                   </button>

@@ -35,11 +35,15 @@ export default function TypedRole() {
 
   return (
     <span className="inline-flex items-center font-mono">
-      <span className="mr-2 text-indigo-400 font-normal">&gt;</span>
-      <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]">
-        {text}
-      </span>
-      <span className="ml-1 inline-block w-[2.5px] h-[0.95em] bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]" />
+      <span className="mr-2 t-accent3 font-normal">&gt;</span>
+      <span className="gradient-text">{text}</span>
+      <span
+        className="ml-1 inline-block w-[2.5px] h-[0.95em] animate-pulse"
+        style={{
+          background: "var(--accent)",
+          boxShadow: "0 0 8px var(--accent)",
+        }}
+      />
     </span>
   )
 }

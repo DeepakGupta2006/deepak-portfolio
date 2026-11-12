@@ -1,114 +1,74 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 
-const links = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#resume", label: "Resume" },
-  { href: "#contact", label: "Contact" },
-];
+const items = ["Home", "About", "Skills", "Projects", "Resume", "Contact"];
 
-function Navbar() {
-  const [active, setActive] = useState<string>("#home");
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar() {
+  const [active, setActive] = useState("Home");
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", handleScroll);
-
-    const sections = links
-      .map((link) => document.querySelector<HTMLElement>(link.href))
-      .filter((el): el is HTMLElement => el !== null);
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActive(`#${entry.target.id}`);
+            const name = items.find(
+              (i) => i.toLowerCase() === entry.target.id
+            );
+            if (name) setActive(name);
           }
         });
       },
       { rootMargin: "-40% 0px -55% 0px" }
     );
 
-    sections.forEach((section) => observer.observe(section));
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", handleScroll);
-    };
+    items.forEach((i) => {
+      const el = document.getElementById(i.toLowerCase());
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-5 inset-x-0 z-50 flex justify-center px-4 pointer-events-none"
-    >
-      <nav
-        className={`pointer-events-auto flex items-center gap-2 md:gap-5 rounded-full px-3 md:px-6 py-2.5 transition-all duration-500 ${
-          scrolled
-            ? "bg-[#080d1a]/85 backdrop-blur-xl border border-cyan-500/30 shadow-[0_10px_35px_-10px_rgba(6,182,212,0.35)]"
-            : "bg-slate-900/50 backdrop-blur-md border border-white/10"
-        }`}
-      >
-        {/* Brand Monogram */}
+    <header className="fixed left-1/2 top-4 z-50 -translate-x-1/2">
+      <nav className="nav-pill flex max-w-[calc(100vw-1rem)] items-center gap-1 overflow-x-auto whitespace-nowrap rounded-full px-3 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {/* Logo: first letter "D" in its own color (changes with the theme) */}
         <a
-          href="#home"
-          className="hidden sm:flex items-center gap-1.5 pr-2 font-display font-bold text-lg tracking-wider text-white group"
-        >
-          <span className="text-cyan-400 transition-transform duration-300 group-hover:-translate-x-0.5">
-            &lt;
-          </span>
-          <span>D</span>
-          <span className="text-indigo-400 transition-transform duration-300 group-hover:translate-x-0.5">
-            /&gt;
-          </span>
-        </a>
+  href="#home"
+  className="t-text shrink-0 px-3 text-2xl font-black tracking-tight"
+  style={{ WebkitTextStroke: "0.8px currentColor" }}
+>
+  <span
+    className="text-3xl font-black"
+    style={{ color: "var(--logo-d)", WebkitTextStroke: "0.8px var(--logo-d)" }}
+  >
+    D
+  </span>
+  eepak<span className="t-accent"></span>
+</a>
 
-        {/* Navigation Links with Sliding Pill */}
-        <ul className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium">
-          {links.map((link) => {
-            const isActive = active === link.href;
-            return (
-              <li key={link.href} className="relative">
-                <a
-                  href={link.href}
-                  onClick={() => setActive(link.href)}
-                  className={`relative z-10 block px-3 py-1.5 rounded-full transition-colors duration-300 ${
-                    isActive
-                      ? "text-white font-semibold"
-                      : "text-slate-400 hover:text-cyan-300"
-                  }`}
-                >
-                  {link.label}
-                </a>
+        {items.map((item) => (
+          <a
+            key={item}
+            href={`#${item.toLowerCase()}`}
+            onClick={() => setActive(item)}
+            className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition ${
+              active === item ? "nav-active" : "t-muted hover:opacity-80"
+            }`}
+          >
+            {item}
+          </a>
+        ))}
 
-                {isActive && (
-                  <motion.span
-                    layoutId="activeNavbarPill"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/25 to-indigo-500/25 border border-cyan-400/40 shadow-[0_0_15px_rgba(34,211,238,0.35)]"
-                  />
-                )}
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* Quick CTA Button */}
         <a
           href="#contact"
-          className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-600 px-4 py-1.5 text-xs font-semibold text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(99,102,241,0.6)]"
+          className="btn-grad ml-1 shrink-0 rounded-full px-4 py-1.5 text-sm font-semibold"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
           Hire Me
         </a>
+
+        <ThemeToggle />
       </nav>
-    </motion.header>
+    </header>
   );
 }
-
-export default Navbar;

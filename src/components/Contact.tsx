@@ -90,14 +90,14 @@ function Contact() {
       <div className="max-w-5xl w-full mx-auto my-auto">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 px-3.5 py-1 text-xs font-mono uppercase tracking-widest text-cyan-300 mb-3">
-            <HiSparkles className="text-cyan-400" />
+          <div className="chip inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-mono uppercase tracking-widest mb-3">
+            <HiSparkles />
             <span>Let's Connect</span>
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold t-text">
             Get In <span className="text-gradient-cyber">Touch</span>
           </h2>
-          <p className="mt-3 text-slate-400 text-sm sm:text-base">
+          <p className="mt-3 t-muted text-sm sm:text-base">
             Open for full-stack internships, freelance projects, and software
             engineering collaborations. Reach out through any channel below!
           </p>
@@ -126,7 +126,7 @@ function Contact() {
 
               <div className="flex items-start justify-between">
                 <div
-                  className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-900/90 border border-white/10 transition-transform duration-300 group-hover:scale-110"
+                  className="tile flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
                   style={{ boxShadow: `0 0 20px -4px ${card.glow}55` }}
                 >
                   {card.icon}
@@ -136,12 +136,12 @@ function Contact() {
                   <button
                     onClick={(e) => handleCopy(e, card.title, card.copyValue!)}
                     title="Copy to clipboard"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-slate-900/80 border border-white/10 px-3 py-1 text-xs font-mono text-slate-300 hover:border-cyan-400/50 hover:text-cyan-300 transition"
+                    className="glass t-muted inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono hover:text-cyan-500 transition"
                   >
                     {copiedTitle === card.title ? (
                       <>
-                        <FiCheck className="text-emerald-400" />
-                        <span className="text-emerald-400">Copied</span>
+                        <FiCheck className="text-emerald-500" />
+                        <span className="text-emerald-500">Copied</span>
                       </>
                     ) : (
                       <>
@@ -151,17 +151,17 @@ function Contact() {
                     )}
                   </button>
                 ) : (
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-900/60 border border-white/10 text-slate-400 group-hover:text-cyan-300 group-hover:border-cyan-400/40 transition">
+                  <span className="glass t-muted flex h-8 w-8 items-center justify-center rounded-full group-hover:text-cyan-500 transition">
                     <FiArrowUpRight />
                   </span>
                 )}
               </div>
 
               <div className="mt-6">
-                <h3 className="font-display text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                <h3 className="font-display text-xl font-bold t-text group-hover:text-cyan-500 transition-colors">
                   {card.title}
                 </h3>
-                <p className="text-sm text-slate-400 mt-1 truncate">
+                <p className="text-sm t-muted mt-1 truncate">
                   {card.subtitle}
                 </p>
               </div>
@@ -171,12 +171,12 @@ function Contact() {
       </div>
 
       {/* Sleek Bottom Footer */}
-      <footer className="max-w-6xl w-full mx-auto mt-20 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-mono">
+      <footer className="b-line max-w-6xl w-full mx-auto mt-20 pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs t-muted font-mono">
         <p>© {new Date().getFullYear()} Deepak R. Gupta. All rights reserved.</p>
-        <p className="text-slate-400">
-          Crafted with <span className="text-cyan-400">React</span>,{" "}
-          <span className="text-indigo-400">TypeScript</span> &{" "}
-          <span className="text-purple-400">Framer Motion</span>
+        <p>
+          Crafted with <span className="t-accent">React</span>,{" "}
+          <span className="t-accent3">TypeScript</span> &{" "}
+          <span className="text-purple-500">Framer Motion</span>
         </p>
       </footer>
     </section>

@@ -4,101 +4,364 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --bg-obsidian: #050811;
-  --accent-cyan: #06b6d4;
-  --accent-indigo: #6366f1;
-  --accent-violet: #8b5cf6;
-}
-
-html {
-  scroll-behavior: smooth;
-  font-family: 'Inter', sans-serif;
+/* ================= THEMES ================= */
+:root,
+[data-theme="dark"] {
+  --bg: #050811;
+  --card: rgba(15, 23, 42, 0.55);
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --accent: #22d3ee;
+  --accent-2: #8b5cf6;
+  --accent-3: #818cf8;
+  --accent-soft: rgba(34, 211, 238, 0.15);
+  --nav-bg: rgba(10, 16, 30, 0.7);
+  --grid: rgba(255, 255, 255, 0.025);
+  --panel-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --title-from: #ffffff;
+  --title-via: #f1f5f9;
+  --title-to: #a5f3fc;
   color-scheme: dark;
 }
 
+[data-theme="light"] {
+  --bg: #eef3f9;
+  --card: rgba(255, 255, 255, 0.85);
+  --line: rgba(15, 23, 42, 0.12);
+  --text: #0f172a;
+  --muted: #475569;
+  --accent: #0891b2;
+  --accent-2: #6d28d9;
+  --accent-3: #4f46e5;
+  --accent-soft: rgba(8, 145, 178, 0.14);
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --grid: rgba(15, 23, 42, 0.06);
+  --panel-shadow: 0 8px 28px 0 rgba(15, 23, 42, 0.08);
+  --title-from: #0f172a;
+  --title-via: #1e293b;
+  --title-to: #0891b2;
+  color-scheme: light;
+}
+
+[data-theme="realistic"] {
+  --bg: #020617;
+  --card: rgba(8, 28, 40, 0.45);
+  --line: rgba(255, 255, 255, 0.18);
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+  --accent: #2dd4bf;
+  --accent-2: #f59e0b;
+  --accent-3: #38bdf8;
+  --accent-soft: rgba(45, 212, 191, 0.18);
+  --nav-bg: rgba(6, 20, 30, 0.45);
+  --grid: transparent;
+  --panel-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+  --title-from: #ffffff;
+  --title-via: #f1f5f9;
+  --title-to: #99f6e4;
+  color-scheme: dark;
+}
+
+/* ================= BASE ================= */
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+}
+
 body {
-  background-color: var(--bg-obsidian);
-  color: #f8fafc;
+  background: var(--bg);
+  color: var(--text);
   overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 ::selection {
-  background: rgba(6, 182, 212, 0.3);
-  color: #22d3ee;
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 
 h1, h2, h3, h4, .font-display {
   font-family: 'Space Grotesk', sans-serif;
 }
 
-/* Subtle Cyber Grid Background */
+/* ================= YOUR EXISTING UTILITIES (now theme-aware) ================= */
 .bg-cyber-grid {
   background-size: 45px 45px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
 }
 
-/* Glassmorphism Card Utility */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.55);
+  background: var(--card);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid var(--line);
+  box-shadow: var(--panel-shadow);
 }
 
 .glass-panel-hover {
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .glass-panel-hover:hover {
-  border-color: rgba(34, 211, 238, 0.4);
-  box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.25), 0 0 15px -5px rgba(99, 102, 241, 0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 30px -5px var(--accent);
 }
 
-/* Gradient Text Utility */
 .text-gradient-cyber {
-  background: linear-gradient(135deg, #22d3ee 0%, #818cf8 50%, #c084fc 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-3) 50%, var(--accent-2) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Floating photo animation used in About */
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-16px) rotate(1deg);
-  }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(1deg); }
 }
+.float-animation { animation: float 5s ease-in-out infinite; }
 
-.float-animation {
-  animation: float 5s ease-in-out infinite;
-}
+.perspective-1000 { perspective: 1000px; }
+.preserve-3d { transform-style: preserve-3d; }
 
-/* Utility perspective classes */
-.perspective-1000 {
-  perspective: 1000px;
-}
-.preserve-3d {
-  transform-style: preserve-3d;
-}
-
-/* Custom Gradient Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #050811;
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #06b6d4, #6366f1);
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
   border-radius: 999px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #22d3ee, #818cf8);
+
+/* ================= NEW THEME CLASSES ================= */
+.glass {
+  background: var(--card);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
+.t-text { color: var(--text); }
+.t-muted { color: var(--muted); }
+.t-accent { color: var(--accent); }
+.b-line { border-color: var(--line); }
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-title {
+  background: linear-gradient(180deg, var(--title-from), var(--title-via), var(--title-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.btn-grad {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #fff;
+}
+.nav-pill {
+  background: var(--nav-bg);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.nav-active {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  color: var(--text);
+}
+
+/* Old decorative layers: dim in light, hide in realistic (it has its own sky) */
+[data-theme="light"] .ambient { opacity: 0.5; }
+[data-theme="light"] .star-layer { opacity: 0.25; }
+[data-theme="realistic"] .ambient,
+[data-theme="realistic"] .star-layer { display: none; }
+
+/* ================= REALISTIC BACKGROUND ANIMATIONS ================= */
+@keyframes aurora-drift {
+  from { transform: translateX(-4%) skewY(-6deg); }
+  to   { transform: translateX(4%) skewY(-3deg); }
+}
+@keyframes twinkle { 50% { opacity: 0.25; } }
+.aurora-a { animation: aurora-drift 14s ease-in-out infinite alternate; }
+.aurora-b { animation: aurora-drift 20s ease-in-out infinite alternate-reverse; }
+.star-twinkle { animation: twinkle 3s ease-in-out infinite; }
+
+/* ================= LIGHT THEME SAFETY NET =================
+   Fixes hardcoded dark Tailwind classes in components I haven't converted yet. */
+[data-theme="light"] .text-white,
+[data-theme="light"] .text-slate-100,
+[data-theme="light"] .text-slate-200 { color: var(--text); }
+
+[data-theme="light"] .text-gray-300,
+[data-theme="light"] .text-gray-400,
+[data-theme="light"] .text-slate-300,
+[data-theme="light"] .text-slate-400,
+[data-theme="light"] .text-slate-500 { color: var(--muted); }
+
+[data-theme="light"] .text-cyan-300,
+[data-theme="light"] .text-cyan-400 { color: var(--accent); }
+
+[data-theme="light"] .bg-slate-900,
+[data-theme="light"] .bg-slate-950,
+[data-theme="light"] .bg-slate-900\/80,
+[data-theme="light"] .bg-slate-900\/75,
+[data-theme="light"] .bg-slate-900\/60,
+[data-theme="light"] .bg-slate-900\/50,
+[data-theme="light"] .bg-slate-800\/80 { background-color: var(--card); }
+
+[data-theme="light"] .border-white\/5,
+[data-theme="light"] .border-white\/10,
+[data-theme="light"] .border-white\/15 { border-color: var(--line); }
+
+/* Keep white text on gradient buttons */
+[data-theme="light"] [class*="bg-gradient-to-r"].text-white,
+[data-theme="light"] .btn-grad { color: #fff; }
+
+/* Safety net: old hardcoded obsidian wrapper follows the theme */
+.bg-\[\#050811\] { background-color: transparent; }
+
+/* ===== EXTRA THEME FIXES: cards, pills, tags (Light + Realistic) ===== */
+
+/* Big cards/panels with hardcoded dark backgrounds -> theme card */
+[data-theme="light"] [class*="bg-slate-9"],
+[data-theme="light"] [class*="bg-gray-9"],
+[data-theme="light"] [class*="bg-zinc-9"],
+[data-theme="light"] [class*="bg-neutral-9"],
+[data-theme="light"] [class*="bg-[#0"] {
+  background-color: var(--card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Small things (filter pills, progress tracks, icon tiles) -> soft tint */
+[data-theme="light"] [class*="bg-slate-8"],
+[data-theme="light"] [class*="bg-slate-7"],
+[data-theme="light"] [class*="bg-gray-8"],
+[data-theme="light"] [class*="bg-gray-7"],
+[data-theme="light"] [class*="bg-zinc-8"],
+[data-theme="light"] [class*="bg-zinc-7"] {
+  background-color: rgba(15, 23, 42, 0.07);
+}
+
+/* Borders */
+[data-theme="light"] [class*="border-slate-"],
+[data-theme="light"] [class*="border-gray-"],
+[data-theme="light"] [class*="border-white"] {
+  border-color: var(--line);
+}
+
+/* More muted text shades */
+[data-theme="light"] .text-slate-500,
+[data-theme="light"] .text-slate-600,
+[data-theme="light"] .text-gray-500,
+[data-theme="light"] .text-gray-600 {
+  color: var(--muted);
+}
+
+/* Keep white text on dark tooltips / dark overlays */
+[data-theme="light"] [class*="bg-black"].text-white,
+[data-theme="light"] [class*="bg-black"] .text-white {
+  color: #fff;
+}
+
+/* ---------- REALISTIC: let the night sky show through cards ---------- */
+[data-theme="realistic"] [class*="bg-slate-9"],
+[data-theme="realistic"] [class*="bg-gray-9"],
+[data-theme="realistic"] [class*="bg-zinc-9"],
+[data-theme="realistic"] [class*="bg-neutral-9"],
+[data-theme="realistic"] [class*="bg-[#0"] {
+  background-color: var(--card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+[data-theme="realistic"] [class*="bg-slate-8"],
+[data-theme="realistic"] [class*="bg-slate-7"] {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+[data-theme="realistic"] [class*="border-slate-"],
+[data-theme="realistic"] [class*="border-white"] {
+  border-color: var(--line);
+}
+
+/* ===== LIGHT THEME: any near-white text becomes dark ===== */
+[data-theme="light"] [class*="text-white"],
+[data-theme="light"] [class*="text-slate-50"],
+[data-theme="light"] [class*="text-slate-100"],
+[data-theme="light"] [class*="text-slate-200"],
+[data-theme="light"] [class*="text-gray-50"],
+[data-theme="light"] [class*="text-gray-100"],
+[data-theme="light"] [class*="text-gray-200"],
+[data-theme="light"] [class*="text-zinc-50"],
+[data-theme="light"] [class*="text-zinc-100"],
+[data-theme="light"] [class*="text-zinc-200"],
+[data-theme="light"] [class*="text-neutral-50"],
+[data-theme="light"] [class*="text-neutral-100"],
+[data-theme="light"] [class*="text-neutral-200"],
+[data-theme="light"] [class*="text-[#f"],
+[data-theme="light"] [class*="text-[#e"] {
+  color: var(--text);
+}
+
+/* Keep white where the background is a gradient button or a dark tooltip */
+[data-theme="light"] [class*="bg-gradient-to-r"][class*="text-white"],
+[data-theme="light"] .btn-grad,
+[data-theme="light"] [class*="bg-black"][class*="text-white"] {
+  color: #fff;
+}
+
+/* ===== EXTRA THEME VARIABLES + CLASSES (used by Projects/Skills/Resume/Contact/Loader) ===== */
+:root,
+[data-theme="dark"] {
+  --tile: rgba(15, 23, 42, 0.9);
+  --track: #1e293b;
+  --modal: #0b1120;
+  --img-fade: rgba(2, 6, 23, 0.95);
+  --card-solid: rgba(15, 23, 42, 0.92);
+}
+[data-theme="light"] {
+  --tile: rgba(255, 255, 255, 0.95);
+  --track: rgba(15, 23, 42, 0.1);
+  --modal: #ffffff;
+  --img-fade: rgba(255, 255, 255, 0.92);
+  --card-solid: rgba(255, 255, 255, 0.96);
+}
+[data-theme="realistic"] {
+  --tile: rgba(8, 28, 40, 0.7);
+  --track: rgba(255, 255, 255, 0.15);
+  --modal: rgba(6, 20, 30, 0.94);
+  --img-fade: rgba(4, 18, 28, 0.9);
+  --card-solid: rgba(8, 28, 40, 0.85);
+}
+
+.chip {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-soft);
+  color: var(--accent);
+}
+.tile {
+  background: var(--tile);
+  border: 1px solid var(--line);
+}
+.track { background: var(--track); }
+.card-solid {
+  background: var(--card-solid);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--line);
+  box-shadow: var(--panel-shadow);
+}
+.modal-surface {
+  background: var(--modal);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.t-accent3 { color: var(--accent-3); }
+.on-dark { color: #fff; }
+
+/* Logo "D" color per theme */
+:root,
+[data-theme="dark"] { --logo-d: #8b5cf6; }      /* violet */
+[data-theme="light"] { --logo-d: #0ea5e9; }     /* sky blue */
+[data-theme="realistic"] { --logo-d: #f59e0b; } /* gold */

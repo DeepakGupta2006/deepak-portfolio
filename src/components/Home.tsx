@@ -23,7 +23,7 @@ const innerRing: OrbitItem[] = [
 const outerRing: OrbitItem[] = [
   { icon: <SiPython className="text-[#38bdf8] text-4xl md:text-5xl" />, glow: "#38bdf8" },
   { icon: <SiFlutter className="text-cyan-400 text-4xl md:text-5xl" />, glow: "#06b6d4" },
-  { icon: <SiFlask className="text-slate-100 text-4xl md:text-5xl" />, glow: "#e2e8f0" },
+  { icon: <SiFlask className="t-text text-4xl md:text-5xl" />, glow: "#e2e8f0" },
   { icon: <SiJavascript className="text-yellow-400 text-4xl md:text-5xl" />, glow: "#facc15" },
   { icon: <FaJava className="text-orange-500 text-4xl md:text-5xl" />, glow: "#f97316" },
 ];
@@ -67,9 +67,9 @@ function Home() {
       {/* Center Radial Cyber Core Glow */}
       <div className="pointer-events-none absolute h-[450px] w-[450px] rounded-full bg-gradient-to-tr from-cyan-500/15 via-indigo-500/15 to-purple-500/10 blur-[110px]" />
 
-      {/* Dual-toned Starfield Background */}
+      {/* Dual-toned Starfield Background (dimmed in light, hidden in realistic) */}
       <div
-        className="absolute inset-0 opacity-60 pointer-events-none"
+        className="star-layer absolute inset-0 opacity-60 pointer-events-none"
         style={{
           backgroundImage: `
             radial-gradient(circle at 12% 22%, #22d3ee 1px, transparent 2px),
@@ -126,9 +126,9 @@ function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-4 inline-flex items-center gap-2 rounded-full bg-slate-900/80 border border-cyan-500/30 px-3.5 py-1 text-xs font-mono text-cyan-300 backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.2)]"
+            className="glass t-accent mb-4 inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-mono shadow-[0_0_20px_rgba(6,182,212,0.2)]"
           >
-            <HiSparkles className="text-cyan-400 animate-spin" style={{ animationDuration: "4s" }} />
+            <HiSparkles className="t-accent animate-spin" style={{ animationDuration: "4s" }} />
             <span>Building Scalable Digital Experiences</span>
           </motion.div>
 
@@ -136,7 +136,7 @@ function Home() {
           <motion.h1
             animate={{ scale: [1, 1.025, 1] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="font-display text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-wider bg-gradient-to-b from-white via-slate-100 to-cyan-200 bg-clip-text text-transparent"
+            className="hero-title font-display text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-wider"
             style={{
               filter: "drop-shadow(0 0 25px rgba(6, 182, 212, 0.45))",
             }}
@@ -158,7 +158,7 @@ function Home() {
           >
             <a
               href="#projects"
-              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 to-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(6,182,212,0.45)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(99,102,241,0.65)]"
+              className="btn-grad group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-6 py-2.5 text-sm font-semibold shadow-[0_0_25px_rgba(6,182,212,0.45)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(99,102,241,0.65)]"
             >
               <span>View Projects</span>
               <HiOutlineArrowDown className="transition-transform duration-300 group-hover:translate-y-0.5" />
@@ -166,7 +166,7 @@ function Home() {
 
             <a
               href="#resume"
-              className="inline-flex items-center gap-2 rounded-full bg-slate-900/75 border border-white/15 px-6 py-2.5 text-sm font-semibold text-slate-200 backdrop-blur-md transition-all duration-300 hover:border-cyan-400/50 hover:text-cyan-300 hover:bg-slate-800/80"
+              className="glass t-text inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-300 hover:scale-105"
             >
               <span>Resume</span>
             </a>
@@ -179,10 +179,10 @@ function Home() {
         href="#about"
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-xs font-mono uppercase tracking-widest text-slate-400 hover:text-cyan-400 transition-colors"
+        className="t-muted absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-xs font-mono uppercase tracking-widest transition-colors"
       >
         <span className="text-[10px]">Scroll</span>
-        <HiOutlineArrowDown className="text-base text-cyan-400" />
+        <HiOutlineArrowDown className="t-accent text-base" />
       </motion.a>
     </section>
   );

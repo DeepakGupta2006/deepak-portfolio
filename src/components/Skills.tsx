@@ -103,8 +103,8 @@ const skillsData: SkillItem[] = [
     name: "Flask",
     category: "Backend & DB",
     level: 80,
-    icon: <SiFlask className="text-slate-100" />,
-    glow: "#e2e8f0",
+    icon: <SiFlask className="t-text" />,
+    glow: "#94a3b8",
   },
   {
     name: "MongoDB",
@@ -133,8 +133,8 @@ const skillsData: SkillItem[] = [
     name: "Git & GitHub",
     category: "Tools & Core",
     level: 88,
-    icon: <FaGithub className="text-slate-200" />,
-    glow: "#cbd5e1",
+    icon: <FaGithub className="t-text" />,
+    glow: "#94a3b8",
   },
   {
     name: "VS Code",
@@ -176,14 +176,14 @@ function Skills() {
       <div className="max-w-6xl w-full mx-auto">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 px-3.5 py-1 text-xs font-mono uppercase tracking-widest text-indigo-300 mb-3">
-            <HiCpuChip className="text-indigo-400 text-sm" />
+          <div className="chip inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-mono uppercase tracking-widest mb-3">
+            <HiCpuChip className="text-sm" />
             <span>Technical Arsenal</span>
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold t-text">
             Skills & <span className="text-gradient-cyber">Technologies</span>
           </h2>
-          <p className="mt-3 text-slate-400 text-sm sm:text-base">
+          <p className="mt-3 t-muted text-sm sm:text-base">
             My full-stack toolkit for building responsive interfaces, robust backend
             APIs, and relational/NoSQL databases.
           </p>
@@ -199,8 +199,8 @@ function Skills() {
                 onClick={() => setSelected(cat)}
                 className={`relative rounded-full px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-300 ${
                   active
-                    ? "text-white bg-gradient-to-r from-cyan-500 to-indigo-600 shadow-[0_0_20px_rgba(6,182,212,0.4)]"
-                    : "text-slate-400 bg-slate-900/70 border border-white/10 hover:border-cyan-400/40 hover:text-slate-200"
+                    ? "btn-grad shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+                    : "glass t-muted hover:opacity-80"
                 }`}
               >
                 {cat}
@@ -234,27 +234,27 @@ function Skills() {
 
                 <div className="flex items-center justify-between mb-4">
                   <div
-                    className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-900/90 border border-white/10 text-2xl transition-transform duration-300 group-hover:scale-110"
+                    className="tile flex h-12 w-12 items-center justify-center rounded-xl text-2xl transition-transform duration-300 group-hover:scale-110"
                     style={{
                       boxShadow: `0 0 18px -4px ${skill.glow}55`,
                     }}
                   >
                     {skill.icon}
                   </div>
-                  <span className="font-mono text-xs font-semibold text-cyan-300 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-2.5 py-0.5">
+                  <span className="chip font-mono text-xs font-semibold rounded-full px-2.5 py-0.5">
                     {skill.level}%
                   </span>
                 </div>
 
-                <h3 className="font-display text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
+                <h3 className="font-display text-base font-bold t-text group-hover:text-cyan-500 transition-colors">
                   {skill.name}
                 </h3>
-                <p className="text-xs text-slate-400 mt-0.5 mb-3">
+                <p className="text-xs t-muted mt-0.5 mb-3">
                   {skill.category}
                 </p>
 
                 {/* Animated Progress Bar */}
-                <div className="h-1.5 w-full rounded-full bg-slate-800 overflow-hidden">
+                <div className="track h-1.5 w-full rounded-full overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}
