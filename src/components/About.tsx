@@ -1,7 +1,30 @@
 import { useRef } from "react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { FaGraduationCap, FaCode, FaAward, FaGithub } from "react-icons/fa";
-import { HiSparkles, HiOutlineDocumentText, HiAcademicCap } from "react-icons/hi2";
+import {
+  FaGraduationCap,
+  FaCode,
+  FaAward,
+  FaGithub,
+  FaLinkedin,
+  FaInstagram,
+  FaWhatsapp,
+} from "react-icons/fa";
+import { HiAcademicCap, HiMapPin } from "react-icons/hi2";
+
+// Change this to your real location
+const LOCATION = "Bhiwandi, Maharashtra, India";
+
+// Social icon tiles (same style as the contact icons)
+const socials = [
+  { label: "GitHub", href: "https://github.com/DeepakGupta2006", icon: FaGithub },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/deepak-gupta-821945296",
+    icon: FaLinkedin,
+  },
+  { label: "Instagram", href: "https://instagram.com/deepakkk____21", icon: FaInstagram },
+  { label: "WhatsApp", href: "https://wa.me/918806627054", icon: FaWhatsapp },
+];
 
 const highlights = [
   {
@@ -62,7 +85,7 @@ function About() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="lg:col-span-5 flex justify-center"
+          className="lg:col-span-5 flex flex-col items-center gap-7"
           style={{ perspective: 1100 }}
           ref={cardRef}
           onMouseMove={handleMouseMove}
@@ -86,30 +109,6 @@ function About() {
                   alt="Deepak R Gupta"
                   className="w-full h-full object-cover object-[center_15%] transition-transform duration-700 group-hover:scale-105"
                 />
-                {/* Soft fade at bottom, follows the theme */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(to top, var(--img-fade) 0%, transparent 45%)",
-                  }}
-                />
-
-                {/* Bottom Overlay Name Tag (stays dark on every theme) */}
-                <div
-                  className="absolute bottom-4 inset-x-4 rounded-xl backdrop-blur-md border border-white/10 px-4 py-2.5 flex items-center justify-between"
-                  style={{ background: "rgba(2, 6, 23, 0.8)" }}
-                >
-                  <div>
-                    <p className="text-xs font-mono" style={{ color: "#22d3ee" }}>
-                      FULL STACK DEV
-                    </p>
-                    <p className="on-dark text-sm font-display font-bold">
-                      Deepak R. Gupta
-                    </p>
-                  </div>
-                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] animate-pulse" />
-                </div>
               </div>
 
               {/* Floating 3D Corner Badge - Top Right */}
@@ -121,6 +120,12 @@ function About() {
               </div>
             </div>
           </motion.div>
+
+          {/* Location pill under the photo */}
+          <div className="glass t-text flex w-72 items-center justify-center gap-2.5 rounded-full px-6 py-3 text-sm font-semibold shadow-[0_10px_30px_-12px_rgba(0,0,0,0.5)] sm:w-80">
+            <HiMapPin className="t-accent text-lg" />
+            <span>{LOCATION}</span>
+          </div>
         </motion.div>
 
         {/* Right Column: Bio + Bento Highlights (7 cols on desktop) */}
@@ -186,27 +191,23 @@ function About() {
             ))}
           </div>
 
-          {/* Bottom Quick Links */}
+          {/* Social icon tiles */}
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              href="https://github.com/DeepakGupta2006"
-              target="_blank"
-              rel="noreferrer"
-              className="glass t-text inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-sm font-medium transition-all hover:text-cyan-500 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]"
-            >
-              <FaGithub className="text-lg" />
-              <span>github.com/DeepakGupta2006</span>
-            </a>
-
-            <a
-              href="/Deepak_R.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="chip inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all hover:opacity-80"
-            >
-              <HiOutlineDocumentText className="text-lg" />
-              <span>Download CV</span>
-            </a>
+            {socials.map(({ label, href, icon: Icon }) => (
+              <motion.a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                title={label}
+                whileHover={{ y: -5, scale: 1.06 }}
+                whileTap={{ scale: 0.96 }}
+                className="glass-panel glass-panel-hover t-text grid h-14 w-14 place-items-center rounded-2xl text-2xl"
+              >
+                <Icon />
+              </motion.a>
+            ))}
           </div>
         </motion.div>
       </div>

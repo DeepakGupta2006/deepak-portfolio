@@ -365,3 +365,6 @@ h1, h2, h3, h4, .font-display {
 [data-theme="dark"] { --logo-d: #8b5cf6; }      /* violet */
 [data-theme="light"] { --logo-d: #0ea5e9; }     /* sky blue */
 [data-theme="realistic"] { --logo-d: #f59e0b; } /* gold */
+/* Live realistic background fade-in */
+@keyframes live-fade-in { from { opacity: 0 } to { opacity: 1 } }
+.live-fade { animation: live-fade-in 0.9s ease both; }

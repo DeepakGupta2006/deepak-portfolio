@@ -9,7 +9,6 @@ import Projects from './components/Projects'
 import Resume from './components/Resume'
 import Contact from './components/Contact'
 import Background from './components/Background'
-import ContactRail from './components/ContactRail'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -62,8 +61,6 @@ function App() {
         <div className="absolute top-1/3 -right-40 h-[28rem] w-[28rem] rounded-full bg-indigo-600/10 blur-[150px]" />
         <div className="absolute -bottom-40 left-1/4 h-96 w-96 rounded-full bg-purple-600/10 blur-[140px]" />
       </div>
-
-      <ContactRail />
 
       <div className="relative z-10">
         <Navbar />
