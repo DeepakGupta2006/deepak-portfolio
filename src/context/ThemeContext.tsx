@@ -18,7 +18,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     try {
-      const saved = localStorage.getItem("theme");
+      const saved = localStorage.getItem("portfolio-theme");
       if (saved === "light" || saved === "dark" || saved === "realistic") {
         return saved;
       }
@@ -31,7 +31,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     try {
-      localStorage.setItem("theme", theme);
+      localStorage.setItem("portfolio-theme", theme);
     } catch {
       /* ignore */
     }
