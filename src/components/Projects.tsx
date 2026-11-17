@@ -78,7 +78,7 @@ const projects: Project[] = [
   {
   title: "AI Voice Assistant",
   tech: ["Python", "Faster-Whisper", "Ollama", "Flask", "sounddevice", "psutil"],
-  image: "/AI-Brain.jpeg",
+  image: "/friday-banner.png",
   description:
     "Private Human style Voice Assistant for Windows that runs fully on your own PC. Say Friday or Jarvis to open apps, control the system, message contacts on WhatsApp and look up Wikipedia and news, with no cloud AI, API keys or GPU.",
   highlights: [
@@ -88,22 +88,6 @@ const projects: Project[] = [
   icon: <FaRobot className="text-[#38E1FF] text-4xl" />,
   glow: "#38E1FF",
   github: "https://github.com/DeepakGupta2006/friday",
-},
-
-  {
-    title: "Hotel Reservation",
-    tech: ["Java", "MySQL", "JDBC", "OOP"],
-    image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1000&q=80",
-    description:
-      "Relational hotel booking & management system supporting room availability checks, reservation scheduling, billing, and customer record management A database-driven hotel reservation application developed to manage guest information and hotel booking records efficiently..",
-    highlights: [
-      "Normalized MySQL Schema with JDBC Connectivity",
-      "Automated Room Allocation & Check-in/Check-out",
-      "CRUD Operations with Transaction Safety",
-    ],
-    icon: <BiSolidHotel className="text-amber-400 text-4xl" />,
-    glow: "#f59e0b",
-    github: "https://github.com/DeepakGupta2006/hotelreservation",
 },
 
   {
