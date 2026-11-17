@@ -7,7 +7,7 @@ import {
   useAnimationFrame,
   AnimatePresence,
 } from "framer-motion";
-import { FaJava, FaReact, FaGithub, FaExternalLinkAlt, FaNewspaper, FaRobot, FaUserShield,} from "react-icons/fa";
+import { FaJava, FaReact, FaGithub, FaExternalLinkAlt, FaNewspaper, FaRobot, FaUserShield } from "react-icons/fa";
 import { SiFoodpanda, SiIfood, SiPython } from "react-icons/si";
 import { BiSolidHotel } from "react-icons/bi";
 import { HiSparkles, HiOutlineSquares2X2, HiOutlineGlobeAlt, HiXMark } from "react-icons/hi2";
@@ -15,6 +15,7 @@ import { FaShopSlash } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import { GiMeal } from "react-icons/gi";
 import { LuFileSearch } from "react-icons/lu";
+import LearningRepos from "./LearningRepos";
 
 interface Project {
   title: string;
@@ -395,6 +396,9 @@ function Projects() {
             />
           ))}
         </div>
+
+        {/* Learning Repos (edit src/components/LearningRepos.tsx) */}
+        <LearningRepos />
       </div>
 
       {/* Detailed Project Modal */}
