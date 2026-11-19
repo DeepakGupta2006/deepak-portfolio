@@ -2,17 +2,24 @@ import { ReactNode, useRef, useState } from "react";
 import {
   motion,
   useMotionValue,
-  useTransform,
-  useSpring,
   useAnimationFrame,
   AnimatePresence,
 } from "framer-motion";
-import { FaJava, FaReact, FaGithub, FaExternalLinkAlt, FaNewspaper, FaRobot, FaUserShield } from "react-icons/fa";
-import { SiFoodpanda, SiIfood, SiPython } from "react-icons/si";
-import { BiSolidHotel } from "react-icons/bi";
-import { HiSparkles, HiOutlineSquares2X2, HiOutlineGlobeAlt, HiXMark } from "react-icons/hi2";
-import { FaShopSlash } from "react-icons/fa6";
-import { FaShoppingCart } from "react-icons/fa";
+import {
+  FaGithub,
+  FaExternalLinkAlt,
+  FaNewspaper,
+  FaRobot,
+  FaUserShield,
+  FaShoppingCart,
+} from "react-icons/fa";
+import {
+  HiSparkles,
+  HiOutlineSquares2X2,
+  HiOutlineGlobeAlt,
+  HiXMark,
+  HiChevronDown,
+} from "react-icons/hi2";
 import { GiMeal } from "react-icons/gi";
 import { LuFileSearch } from "react-icons/lu";
 import LearningRepos from "./LearningRepos";
@@ -26,6 +33,7 @@ interface Project {
   icon: ReactNode;
   glow: string;
   github?: string;
+  demo?: string; // optional: add  demo: "https://..."  to show a "Live Demo" button
 }
 
 const projects: Project[] = [
@@ -125,121 +133,171 @@ const projects: Project[] = [
 },
 ];
 
-function ProjectCard({
-  project,
-  onOpen,
-  compact = false,
-}: {
-  project: Project;
-  onOpen: () => void;
-  compact?: boolean;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const hx = useMotionValue(0);
-  const hy = useMotionValue(0);
 
-  const hoverRotateX = useSpring(useTransform(hy, [-0.5, 0.5], [10, -10]), {
-    stiffness: 200,
-    damping: 18,
-  });
-  const hoverRotateY = useSpring(useTransform(hx, [-0.5, 0.5], [-10, 10]), {
-    stiffness: 200,
-    damping: 18,
-  });
+/* "Title: text" -> bold title + text */
+function Highlight({ text }: { text: string }) {
+  const k = text.indexOf(": ");
+  if (k > 0 && k < 40) {
+    return (
+      <>
+        <strong className="t-text">{text.slice(0, k)}:</strong>
+        {text.slice(k + 1)}
+      </>
+    );
+  }
+  return <>{text}</>;
+}
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-    hx.set((e.clientX - rect.left) / rect.width - 0.5);
-    hy.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
-
-  const reset = () => {
-    hx.set(0);
-    hy.set(0);
-  };
-
+function Banner({ project, className }: { project: Project; className: string }) {
+  const [ok, setOk] = useState(true);
   return (
     <div
-      style={{ perspective: 1200 }}
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={reset}
-      className={compact ? "w-64" : "w-full"}
+      className={`relative flex items-center justify-center overflow-hidden ${className}`}
+      style={{
+        background: `radial-gradient(circle at 70% 25%, ${project.glow}55, transparent 60%), var(--tile)`,
+      }}
     >
-      <motion.div
-        onClick={onOpen}
-        style={{
-          rotateX: hoverRotateX,
-          rotateY: hoverRotateY,
-          transformStyle: "preserve-3d",
-          boxShadow: `0 10px 35px -10px ${project.glow}40`,
-        }}
-        className="card-solid glass-panel-hover group relative rounded-2xl cursor-pointer overflow-hidden"
-      >
-        {/* Top Image Banner */}
-        <div className="relative h-32 w-full overflow-hidden">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to top, var(--img-fade) 0%, transparent 70%)",
-            }}
-          />
+      {ok ? (
+        <img
+          src={project.image}
+          alt={project.title}
+          onError={() => setOk(false)}
+          draggable={false}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <div className="tile flex h-20 w-20 items-center justify-center rounded-2xl">
+          {project.icon}
+        </div>
+      )}
+    </div>
+  );
+}
 
-          {/* Floating Icon Badge */}
-          <div
-            style={{
-              transform: "translateZ(30px)",
-              boxShadow: `0 0 20px ${project.glow}55`,
-            }}
-            className="tile absolute bottom-3 left-4 flex h-12 w-12 items-center justify-center rounded-xl backdrop-blur-md"
-          >
-            {project.icon}
-          </div>
+function Actions({ project }: { project: Project }) {
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      {project.demo && (
+        <a
+          href={project.demo}
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="pbtn-fill"
+        >
+          <FaExternalLinkAlt className="text-xs" />
+          <span>Live Demo</span>
+        </a>
+      )}
+      {project.github && (
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className={project.demo ? "pbtn-line" : "pbtn-fill"}
+        >
+          <FaGithub />
+          <span>View Code</span>
+        </a>
+      )}
+    </div>
+  );
+}
+
+/* Grid card: click to expand in place */
+function GridCard({ project, index }: { project: Project; index: number }) {
+  const [open, setOpen] = useState(false);
+  const shown = project.tech.slice(0, 5);
+  const extra = project.tech.length - shown.length;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
+      onClick={() => setOpen((o) => !o)}
+      className="pcard group relative cursor-pointer self-start overflow-hidden text-left"
+    >
+      <Banner project={project} className="h-52" />
+
+      <div className="p-5">
+        <div className="flex flex-wrap gap-2">
+          {shown.map((t) => (
+            <span key={t} className="pchip">
+              {t}
+            </span>
+          ))}
+          {extra > 0 && <span className="pchip">+{extra}</span>}
         </div>
 
-        {/* Content */}
-        <div className="p-5 text-left">
-          <h3
-            className="font-display text-lg font-bold t-text group-hover:text-cyan-500 transition-colors"
-            style={{ transform: "translateZ(24px)" }}
-          >
+        <div className="mt-4 flex items-start justify-between gap-3">
+          <h3 className="font-display text-lg font-bold leading-snug t-text">
             {project.title}
           </h3>
-
-          {!compact && (
-            <p className="mt-2 text-sm t-muted line-clamp-2">
-              {project.description}
-            </p>
-          )}
-
-          {/* Tech Pills */}
-          <div
-            className="mt-3 flex flex-wrap gap-1.5"
-            style={{ transform: "translateZ(18px)" }}
-          >
-            {project.tech.slice(0, compact ? 3 : 5).map((t) => (
-              <span
-                key={t}
-                className="tile t-accent rounded-md px-2 py-0.5 font-mono text-[10px]"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-
-          <div className="mt-4 flex items-center justify-between text-xs font-mono t-muted group-hover:text-cyan-500 transition-colors">
-            <span>Click to inspect</span>
-            <span>→</span>
-          </div>
+          <HiChevronDown
+            className={`mt-1 shrink-0 text-xl t-muted transition-transform duration-300 ${
+              open ? "rotate-180" : ""
+            }`}
+          />
         </div>
-      </motion.div>
+
+        <p className={`mt-2 text-[15px] leading-relaxed t-muted ${open ? "" : "line-clamp-2"}`}>
+          {project.description}
+        </p>
+
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.ul
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mt-4 space-y-3 overflow-hidden pl-5 text-[15px] leading-relaxed t-muted"
+              style={{ listStyleType: "disc" }}
+            >
+              {project.highlights.map((h, i) => (
+                <li key={i}>
+                  <Highlight text={h} />
+                </li>
+              ))}
+            </motion.ul>
+          )}
+        </AnimatePresence>
+
+        <div className="mt-5">
+          <Actions project={project} />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* Compact card used in the 3D orbit: click opens the detail window */
+function OrbitProjectCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
+  return (
+    <div
+      onClick={onOpen}
+      className="pcard group relative w-72 cursor-pointer overflow-hidden text-left"
+    >
+      <Banner project={project} className="h-36" />
+      <div className="p-4">
+        <div className="flex flex-wrap gap-1.5">
+          {project.tech.slice(0, 3).map((t) => (
+            <span key={t} className="pchip !px-2.5 !py-0.5 !text-[11px]">
+              {t}
+            </span>
+          ))}
+        </div>
+        <h3 className="mt-3 line-clamp-2 font-display text-base font-bold leading-snug t-text">
+          {project.title}
+        </h3>
+        <div className="mt-3 flex items-center justify-between font-mono text-xs t-muted transition-colors group-hover:text-[color:var(--accent)]">
+          <span>Click to inspect</span>
+          <span>→</span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -290,9 +348,9 @@ function OrbitCard({
   return (
     <motion.div
       className="absolute top-1/2 left-1/2"
-      style={{ x, y, scale, zIndex, marginLeft: -128, marginTop: -130 }}
+      style={{ x, y, scale, zIndex, marginLeft: -144, marginTop: -170 }}
     >
-      <ProjectCard project={project} onOpen={onOpen} compact />
+      <OrbitProjectCard project={project} onOpen={onOpen} />
     </motion.div>
   );
 }
@@ -360,12 +418,11 @@ function Projects() {
             onMouseEnter={() => setOrbitPaused(true)}
             onMouseLeave={() => setOrbitPaused(false)}
           >
-            {/* Visual Elliptical Track Ring */}
             <div
               className="pointer-events-none absolute rounded-[100%] border border-dashed border-cyan-500/25 shadow-[inset_0_0_50px_rgba(6,182,212,0.07)]"
               style={{ width: 840, height: 180 }}
             />
-            <div className="relative w-full max-w-5xl" style={{ height: 420 }}>
+            <div className="relative w-full max-w-5xl" style={{ height: 460 }}>
               {projects.map((project, index) => (
                 <OrbitCard
                   key={project.title}
@@ -382,18 +439,14 @@ function Projects() {
           </div>
         )}
 
-        {/* Desktop Grid View OR Mobile View */}
+        {/* Grid View (desktop) / always on mobile: click a card to expand it */}
         <div
           className={`${
             viewMode === "grid" ? "grid" : "grid md:hidden"
-          } grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6`}
+          } grid-cols-1 items-start gap-7 md:grid-cols-2 lg:grid-cols-3`}
         >
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.title}
-              project={project}
-              onOpen={() => setSelectedProject(project)}
-            />
+          {projects.map((project, i) => (
+            <GridCard key={project.title} project={project} index={i} />
           ))}
         </div>
 
@@ -401,14 +454,14 @@ function Projects() {
         <LearningRepos />
       </div>
 
-      {/* Detailed Project Modal */}
+      {/* Detail window (orbit view) */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-md flex justify-center items-center z-[70] p-4"
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-black/70 p-4 backdrop-blur-md"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
@@ -417,95 +470,51 @@ function Projects() {
               exit={{ scale: 0.92, opacity: 0, y: 20 }}
               transition={{ type: "spring", stiffness: 280, damping: 24 }}
               onClick={(e) => e.stopPropagation()}
-              className="modal-surface relative rounded-3xl overflow-hidden max-w-2xl w-full border border-cyan-500/40 shadow-[0_0_50px_-10px_rgba(6,182,212,0.45)]"
+              className="pcard relative max-h-[92vh] w-full max-w-2xl overflow-y-auto"
             >
-              {/* Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="on-dark absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 border border-white/20 hover:border-cyan-400 transition"
+                aria-label="Close"
+                className="on-dark absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/60 transition hover:border-cyan-400"
               >
                 <HiXMark className="text-xl" />
               </button>
 
-              {/* Banner Image */}
-              <div className="relative h-64 w-full overflow-hidden">
-                <img
-                  src={selectedProject.image}
-                  alt={selectedProject.title}
-                  className="w-full h-full object-cover"
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(to top, var(--modal) 0%, transparent 70%)",
-                  }}
-                />
-                <div className="absolute bottom-4 left-6 flex items-center gap-3">
-                  <div className="tile flex h-14 w-14 items-center justify-center rounded-2xl backdrop-blur-md">
-                    {selectedProject.icon}
-                  </div>
-                  <div>
-                    <span className="font-mono text-xs uppercase tracking-widest t-accent">
-                      Project Spotlight
-                    </span>
-                    <h3 className="font-display text-3xl font-bold t-text">
-                      {selectedProject.title}
-                    </h3>
-                  </div>
-                </div>
-              </div>
+              <Banner project={selectedProject} className="h-64" />
 
-              {/* Modal Body */}
               <div className="p-6 sm:p-8">
-                <div className="flex flex-wrap gap-2 mb-5">
+                <h3 className="font-display text-2xl font-bold t-text sm:text-3xl">
+                  {selectedProject.title}
+                </h3>
+
+                <div className="mt-4 flex flex-wrap gap-2">
                   {selectedProject.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="chip rounded-full px-3 py-1 font-mono text-xs"
-                    >
+                    <span key={t} className="pchip">
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <p className="t-muted leading-relaxed text-base">
+                <p className="mt-5 text-base leading-relaxed t-muted">
                   {selectedProject.description}
                 </p>
 
-                {/* Key Highlights */}
-                <div className="tile mt-5 rounded-2xl p-4">
-                  <p className="font-mono text-xs uppercase tracking-wider t-accent3 mb-2.5">
-                    Key Engineering Highlights
-                  </p>
-                  <ul className="space-y-2 text-sm t-muted">
-                    {selectedProject.highlights.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <span className="t-accent mt-0.5">▹</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <ul
+                  className="mt-5 space-y-3 pl-5 text-[15px] leading-relaxed t-muted"
+                  style={{ listStyleType: "disc" }}
+                >
+                  {selectedProject.highlights.map((h, i) => (
+                    <li key={i}>
+                      <Highlight text={h} />
+                    </li>
+                  ))}
+                </ul>
 
-                {/* Modal Footer Actions */}
                 <div className="mt-7 flex flex-wrap items-center justify-between gap-4">
-                  {selectedProject.github && (
-                    <a
-                      href={selectedProject.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="btn-grad inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-105 transition"
-                    >
-                      <FaGithub className="text-lg" />
-                      <span>View on GitHub</span>
-                      <FaExternalLinkAlt className="text-xs" />
-                    </a>
-                  )}
-
+                  <Actions project={selectedProject} />
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="glass t-muted rounded-full px-6 py-2.5 text-sm font-medium hover:opacity-80 transition"
+                    className="pbtn-line"
                   >
                     Close Window
                   </button>

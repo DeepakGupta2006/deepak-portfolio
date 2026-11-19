@@ -50,12 +50,11 @@ function LearningRepoCard({ repo }: { repo: LearningRepo }) {
 
   return (
     <div
-      style={{ boxShadow: `0 10px 35px -12px ${repo.glow}55` }}
-      className="card-solid group relative block cursor-default overflow-hidden rounded-3xl text-left"
+      className="pcard group relative block cursor-default overflow-hidden text-left"
     >
       {/* Banner */}
       <div
-        className="relative flex h-40 items-center justify-center overflow-hidden"
+        className="relative flex h-48 items-center justify-center overflow-hidden"
         style={{
           background: `radial-gradient(circle at 70% 25%, ${repo.glow}55, transparent 60%), radial-gradient(circle at 15% 90%, ${repo.glow}22, transparent 55%), var(--tile)`,
         }}
@@ -68,13 +67,6 @@ function LearningRepoCard({ repo }: { repo: LearningRepo }) {
               onError={() => setImgOk(false)}
               className="h-full w-full cursor-default select-none object-cover"
               draggable={false}
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(to top, var(--img-fade) 0%, transparent 60%)",
-              }}
             />
           </>
         ) : (
@@ -89,11 +81,11 @@ function LearningRepoCard({ repo }: { repo: LearningRepo }) {
 
       {/* Content */}
       <div className="p-5">
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2">
           {repo.tech.map((t) => (
             <span
               key={t}
-              className="chip cursor-text select-text rounded-full px-2.5 py-0.5 font-mono text-[11px]"
+              className="pchip cursor-text select-text"
             >
               {t}
             </span>
@@ -124,11 +116,9 @@ export default function LearningRepos() {
   return (
     <div className="mt-20">
       <div className="mb-10 flex items-center justify-center gap-4">
-        <span className="h-px w-16 bg-gradient-to-r from-transparent to-cyan-500/60 sm:w-28" />
-        <h3 className="chip rounded-full px-7 py-2.5 font-display text-sm font-bold uppercase tracking-widest sm:text-base">
-          Learning Repos
-        </h3>
-        <span className="h-px w-16 bg-gradient-to-l from-transparent to-cyan-500/60 sm:w-28" />
+        <span className="sec-line" />
+        <h3 className="sec-pill font-display text-sm sm:text-base">Learning Repos</h3>
+        <span className="sec-line r" />
       </div>
 
       <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">

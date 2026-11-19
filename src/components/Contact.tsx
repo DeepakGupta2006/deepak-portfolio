@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { motion } from "framer-motion";
-import { FiPhoneCall, FiCopy, FiCheck, FiArrowUpRight } from "react-icons/fi";
+import { FiPhoneCall, FiCopy, FiCheck } from "react-icons/fi";
 import {
   FaEnvelope,
   FaGithub,
@@ -8,175 +8,171 @@ import {
   FaInstagram,
   FaWhatsapp,
 } from "react-icons/fa";
-import { HiSparkles } from "react-icons/hi2";
+import { HiMapPin } from "react-icons/hi2";
 
-interface ContactCard {
-  href: string;
-  glow: string;
-  icon: ReactNode;
-  title: string;
-  subtitle: string;
-  copyValue?: string;
-  external?: boolean;
-}
+/* ===== Edit your details here ===== */
+const EMAIL = "dg7842661@gmail.com";
+const PHONE = "+91 8806627054";
+const LOCATION = "Bhiwandi, Maharashtra, India";
 
-const cards: ContactCard[] = [
+const socials: { label: string; href: string; icon: ReactNode }[] = [
+  { label: "GitHub", href: "https://github.com/DeepakGupta2006", icon: <FaGithub /> },
   {
-    href: "mailto:dg7842661@gmail.com",
-    glow: "#06b6d4",
-    icon: <FaEnvelope className="text-cyan-400 text-2xl" />,
-    title: "Email",
-    subtitle: "dg7842661@gmail.com",
-    copyValue: "dg7842661@gmail.com",
-  },
-  {
-    href: "tel:+918806627054",
-    glow: "#10b981",
-    icon: <FiPhoneCall className="text-emerald-400 text-2xl" />,
-    title: "Phone",
-    subtitle: "+91 8806627054",
-    copyValue: "+91 8806627054",
-  },
-  {
-    href: "https://github.com/DeepakGupta2006",
-    glow: "#a855f7",
-    icon: <FaGithub className="text-purple-400 text-2xl" />,
-    title: "GitHub",
-    subtitle: "github.com/DeepakGupta2006",
-    external: true,
-  },
-  {
+    label: "LinkedIn",
     href: "https://www.linkedin.com/in/deepak-gupta-821945296",
-    glow: "#3b82f6",
-    icon: <FaLinkedin className="text-blue-400 text-2xl" />,
-    title: "LinkedIn",
-    subtitle: "Connect professionally",
-    external: true,
+    icon: <FaLinkedin />,
   },
-  {
-    href: "https://instagram.com/deepakkk____21",
-    glow: "#ec4899",
-    icon: <FaInstagram className="text-pink-400 text-2xl" />,
-    title: "Instagram",
-    subtitle: "@deepakkk____21",
-    external: true,
-  },
-  {
-    href: "https://wa.me/918806627054",
-    glow: "#22c55e",
-    icon: <FaWhatsapp className="text-green-400 text-2xl" />,
-    title: "WhatsApp",
-    subtitle: "Chat with me directly",
-    external: true,
-  },
+  { label: "Instagram", href: "https://instagram.com/deepakkk____21", icon: <FaInstagram /> },
+  { label: "WhatsApp", href: "https://wa.me/918806627054", icon: <FaWhatsapp /> },
 ];
 
-function Contact() {
-  const [copiedTitle, setCopiedTitle] = useState<string | null>(null);
+function Row({
+  icon,
+  label,
+  value,
+  href,
+  copyValue,
+}: {
+  icon: ReactNode;
+  label: string;
+  value: string;
+  href?: string;
+  copyValue?: string;
+}) {
+  const [copied, setCopied] = useState(false);
 
-  const handleCopy = (e: React.MouseEvent, title: string, value: string) => {
+  const copy = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    navigator.clipboard.writeText(value);
-    setCopiedTitle(title);
-    setTimeout(() => setCopiedTitle(null), 2000);
+    navigator.clipboard.writeText(copyValue || value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
+  const inner = (
+    <>
+      <span
+        className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl text-xl"
+        style={{
+          background: "linear-gradient(135deg, var(--pc-btn-from), var(--pc-btn-to))",
+          color: "var(--pc-btn-text)",
+        }}
+      >
+        {icon}
+      </span>
+      <span className="min-w-0 flex-1 text-left">
+        <span className="block text-xs font-bold uppercase tracking-widest t-muted">
+          {label}
+        </span>
+        <span className="block truncate text-base font-bold t-text sm:text-lg">{value}</span>
+      </span>
+      {copyValue && (
+        <button
+          type="button"
+          onClick={copy}
+          title="Copy to clipboard"
+          aria-label={`Copy ${label}`}
+          className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border b-line t-muted transition hover:text-[color:var(--accent)]"
+        >
+          {copied ? <FiCheck className="text-emerald-400" /> : <FiCopy />}
+        </button>
+      )}
+    </>
+  );
+
+  const cls = "prow flex items-center gap-4 px-5 py-4";
+  return href ? (
+    <a href={href} className={`${cls} transition hover:-translate-y-0.5`}>
+      {inner}
+    </a>
+  ) : (
+    <div className={cls}>{inner}</div>
+  );
+}
+
+function Contact() {
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex flex-col justify-between px-6 pt-24 pb-12"
+      className="relative flex min-h-screen flex-col justify-between px-6 pb-12 pt-24"
     >
-      <div className="max-w-5xl w-full mx-auto my-auto">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="chip inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-mono uppercase tracking-widest mb-3">
-            <HiSparkles />
-            <span>Let's Connect</span>
+      <div className="mx-auto my-auto w-full max-w-3xl">
+        {/* Section pill */}
+        <div className="mb-10 flex items-center justify-center gap-4">
+          <span className="sec-line" />
+          <h2 className="sec-pill font-display text-sm sm:text-base">Contact</h2>
+          <span className="sec-line r" />
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55 }}
+          className="pcard p-6 text-center sm:p-12"
+        >
+          <div className="pchip mb-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+            </span>
+            Open to work
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold t-text">
-            Get In <span className="text-gradient-cyber">Touch</span>
-          </h2>
-          <p className="mt-3 t-muted text-sm sm:text-base">
+
+          <h3 className="font-display text-4xl font-bold t-text sm:text-5xl">
+            Let's Connect!
+          </h3>
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed t-muted sm:text-base">
             Open for full-stack internships, freelance projects, and software
-            engineering collaborations. Reach out through any channel below!
+            engineering collaborations. Reach out directly and let's build
+            something great!
           </p>
-        </div>
 
-        {/* Contact Bento Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {cards.map((card, index) => (
-            <motion.a
-              key={card.title}
-              href={card.href}
-              target={card.external ? "_blank" : undefined}
-              rel={card.external ? "noreferrer" : undefined}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.06 }}
-              whileHover={{ y: -6 }}
-              className="group glass-panel glass-panel-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between"
-            >
-              {/* Ambient Corner Glow */}
-              <div
-                className="pointer-events-none absolute -bottom-10 -right-10 h-28 w-28 rounded-full opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-2xl"
-                style={{ backgroundColor: card.glow }}
-              />
+          <div className="mx-auto mt-9 max-w-xl space-y-4">
+            <Row
+              icon={<FaEnvelope />}
+              label="Email me"
+              value={EMAIL}
+              href={`mailto:${EMAIL}`}
+              copyValue={EMAIL}
+            />
+            <Row
+              icon={<FiPhoneCall />}
+              label="Call me"
+              value={PHONE}
+              href={`tel:${PHONE.replace(/\s/g, "")}`}
+              copyValue={PHONE}
+            />
+            <Row icon={<HiMapPin />} label="Location" value={LOCATION} />
+          </div>
 
-              <div className="flex items-start justify-between">
-                <div
-                  className="tile flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
-                  style={{ boxShadow: `0 0 20px -4px ${card.glow}55` }}
-                >
-                  {card.icon}
-                </div>
-
-                {card.copyValue ? (
-                  <button
-                    onClick={(e) => handleCopy(e, card.title, card.copyValue!)}
-                    title="Copy to clipboard"
-                    className="glass t-muted inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono hover:text-cyan-500 transition"
-                  >
-                    {copiedTitle === card.title ? (
-                      <>
-                        <FiCheck className="text-emerald-500" />
-                        <span className="text-emerald-500">Copied</span>
-                      </>
-                    ) : (
-                      <>
-                        <FiCopy />
-                        <span>Copy</span>
-                      </>
-                    )}
-                  </button>
-                ) : (
-                  <span className="glass t-muted flex h-8 w-8 items-center justify-center rounded-full group-hover:text-cyan-500 transition">
-                    <FiArrowUpRight />
-                  </span>
-                )}
-              </div>
-
-              <div className="mt-6">
-                <h3 className="font-display text-xl font-bold t-text group-hover:text-cyan-500 transition-colors">
-                  {card.title}
-                </h3>
-                <p className="text-sm t-muted mt-1 truncate">
-                  {card.subtitle}
-                </p>
-              </div>
-            </motion.a>
-          ))}
-        </div>
+          <p className="mt-10 text-xs font-bold uppercase tracking-[0.25em] t-muted">
+            Find me on
+          </p>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                className="pbtn-line"
+              >
+                <span className="text-lg">{s.icon}</span>
+                <span>{s.label}</span>
+              </a>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
-      {/* Sleek Bottom Footer */}
-      <footer className="b-line max-w-6xl w-full mx-auto mt-20 pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs t-muted font-mono">
+      {/* Footer */}
+      <footer className="b-line mx-auto mt-20 flex w-full max-w-6xl flex-col items-center justify-between gap-4 border-t pt-8 font-mono text-xs t-muted sm:flex-row">
         <p>© {new Date().getFullYear()} Deepak R. Gupta. All rights reserved.</p>
         <p>
           Crafted with <span className="t-accent">React</span>,{" "}
           <span className="t-accent3">TypeScript</span> &{" "}
-          <span className="text-purple-500">Framer Motion</span>
+          <span className="t-accent">Framer Motion</span>
         </p>
       </footer>
     </section>
