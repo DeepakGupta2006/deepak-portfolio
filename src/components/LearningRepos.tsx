@@ -1,23 +1,23 @@
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import { FaCode } from "react-icons/fa";
-import { SiOpenjdk, SiC } from "react-icons/si";
+import ProjectArt, { ArtKind } from "./ProjectArt";
+import { TechChip } from "./techColors";
 
 /* =====================================================================
    LEARNING REPOS  -  edit only this list to change / add cards.
 
-   image : put your picture in  public/learning/  and write "/learning/name.png"
-           (recommended size 1000 x 500). If the image is missing or empty,
-           a glowing icon banner is shown instead.
-   icon  : shown when there is no image.
-   glow  : accent colour of the card.
+   art      : banner picture drawn in code (matches Light / Dark / Realistic).
+              Available: "java" | "c"  (more kinds live in ProjectArt.tsx)
+   useImage : set true to show your own picture from  image  instead
+              (put it in public/ and write "/name.png").
    ===================================================================== */
 interface LearningRepo {
   title: string;
   description: string;
   tech: string[];
+  art: ArtKind;
   image?: string;
-  icon: ReactNode;
-  glow: string;
+  useImage?: boolean;
   github: string;
 }
 
@@ -27,9 +27,8 @@ const learningRepos: LearningRepo[] = [
     description:
       "Java implementations of core data structures and algorithms with problem-solving practice.",
     tech: ["Java", "Data Structures", "Algorithms"],
+    art: "java",
     image: "/java-dsa.png",
-    icon: <SiOpenjdk className="text-5xl" style={{ color: "#F97316" }} />,
-    glow: "#F97316",
     github: "https://github.com/DeepakGupta2006/java-dsa",
   },
   {
@@ -37,45 +36,30 @@ const learningRepos: LearningRepo[] = [
     description:
       "C fundamentals: syntax, pointers, arrays, strings, functions and file handling practice programs.",
     tech: ["C", "Pointers", "Memory"],
+    art: "c",
     image: "/c-programming.png",
-    icon: <SiC className="text-5xl" style={{ color: "#38bdf8" }} />,
-    glow: "#38bdf8",
     github: "https://github.com/DeepakGupta2006/c-programming",
   },
   // Add a new card by copying one block above and changing the values.
 ];
 
 function LearningRepoCard({ repo }: { repo: LearningRepo }) {
-  const [imgOk, setImgOk] = useState(Boolean(repo.image));
+  const [imgOk, setImgOk] = useState(true);
 
   return (
-    <div
-      className="pcard group relative block cursor-default overflow-hidden text-left"
-    >
+    <div className="pcard group relative block cursor-default overflow-hidden text-left">
       {/* Banner */}
-      <div
-        className="relative flex h-48 items-center justify-center overflow-hidden"
-        style={{
-          background: `radial-gradient(circle at 70% 25%, ${repo.glow}55, transparent 60%), radial-gradient(circle at 15% 90%, ${repo.glow}22, transparent 55%), var(--tile)`,
-        }}
-      >
-        {imgOk && repo.image ? (
-          <>
-            <img
-              src={repo.image}
-              alt={repo.title}
-              onError={() => setImgOk(false)}
-              className="h-full w-full cursor-default select-none object-cover"
-              draggable={false}
-            />
-          </>
+      <div className="relative aspect-[2/1] overflow-hidden">
+        {repo.useImage && repo.image && imgOk ? (
+          <img
+            src={repo.image}
+            alt={repo.title}
+            onError={() => setImgOk(false)}
+            className="h-full w-full cursor-default select-none object-cover"
+            draggable={false}
+          />
         ) : (
-          <div
-            className="tile relative flex h-20 w-20 items-center justify-center rounded-2xl backdrop-blur-md"
-            style={{ boxShadow: `0 0 30px ${repo.glow}66` }}
-          >
-            {repo.icon}
-          </div>
+          <ProjectArt kind={repo.art} tech={repo.tech} />
         )}
       </div>
 
@@ -83,19 +67,16 @@ function LearningRepoCard({ repo }: { repo: LearningRepo }) {
       <div className="p-5">
         <div className="flex flex-wrap gap-2">
           {repo.tech.map((t) => (
-            <span
-              key={t}
-              className="pchip cursor-text select-text"
-            >
-              {t}
-            </span>
+            <TechChip key={t} t={t} className="cursor-text select-text" />
           ))}
         </div>
 
-        <h4 className="mt-3 font-display text-lg font-bold t-text cursor-text select-text">
+        <h4 className="mt-4 font-display text-lg font-bold t-text cursor-text select-text">
           {repo.title}
         </h4>
-        <p className="mt-1.5 cursor-text select-text text-sm t-muted line-clamp-2">{repo.description}</p>
+        <p className="mt-1.5 cursor-text select-text text-[15px] leading-relaxed t-muted line-clamp-2">
+          {repo.description}
+        </p>
 
         {/* Only this link is clickable */}
         <a
@@ -121,7 +102,7 @@ export default function LearningRepos() {
         <span className="sec-line r" />
       </div>
 
-      <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
+      <div className="mx-auto grid max-w-3xl grid-cols-1 gap-7 sm:grid-cols-2">
         {learningRepos.map((repo) => (
           <LearningRepoCard key={repo.title} repo={repo} />
         ))}

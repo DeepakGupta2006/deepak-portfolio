@@ -23,11 +23,15 @@ import {
 import { GiMeal } from "react-icons/gi";
 import { LuFileSearch } from "react-icons/lu";
 import LearningRepos from "./LearningRepos";
+import ProjectArt, { ArtKind } from "./ProjectArt";
+import { TechChip } from "./techColors";
 
 interface Project {
   title: string;
   tech: string[];
-  image: string;
+  image: string; // only used when useImage: true
+  art: ArtKind; // banner picture drawn in code (matches every theme)
+  useImage?: boolean; // set true to show your own image instead of the drawn banner
   description: string;
   highlights: string[];
   icon: ReactNode;
@@ -41,6 +45,7 @@ const projects: Project[] = [
     title: "Food Delivery App",
     tech: ["React.js", "MongoDB", "Express", "Node.js"],
     image: "/food-delivery.png",
+    art: "food",
     description:
       "Full-stack food ordering platform featuring user authentication, dynamic cart management, Stripe payment gateway integration, and a real-time admin order dashboard.",
     highlights: [
@@ -56,6 +61,7 @@ const projects: Project[] = [
     title: "AI Resume Matcher",
     tech: ["Python", "Streamlit", "PDFPlumber", "NLP"],
     image: "/resume-matcher-banner.png",
+    art: "resume",
     description:
       "Intelligent NLP web application that parses candidate PDF resumes and evaluates keyword, skill, and semantic alignment against target job descriptions.",
     highlights: [
@@ -73,6 +79,7 @@ const projects: Project[] = [
     title: "Fake News Detector",
   tech: ["Python", "Flask", "scikit-learn", "Pandas"],
  image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1000&q=80",
+ art: "news",
   description:
     "Full-stack ML web app that classifies news text as Real or Fake with a confidence score, trained on 39,000+ real articles with a data-leakage bug found and fixed during development, achieving 98.4% measured accuracy.",
   highlights: [
@@ -88,6 +95,7 @@ const projects: Project[] = [
   title: "AI Voice Assistant",
   tech: ["Python", "Faster-Whisper", "Ollama", "Flask", "sounddevice", "psutil"],
   image: "/friday-banner.png",
+  art: "voice",
   description:
     "Private Human style Voice Assistant for Windows that runs fully on your own PC. Say Friday or Jarvis to open apps, control the system, message contacts on WhatsApp and look up Wikipedia and news, with no cloud AI, API keys or GPU.",
   highlights: [
@@ -103,6 +111,7 @@ const projects: Project[] = [
     title: "NextCart: Full-Stack E-Commerce Platform",
     tech: ["React", "Vite", "Tailwind CSS", "Node.js", "Express", "MongoDB", "JWT", "Razorpay", "Cloudinary"],
     image: "/nextcart.png",
+    art: "cart",
     description:
       "Full-stack MERN fashion store with JWT auth, a per-user persistent cart, Razorpay payments verified server-side via HMAC signatures, Cloudinary image uploads, and an admin dashboard for managing products, orders, and users.",
     highlights: [
@@ -121,6 +130,7 @@ const projects: Project[] = [
   title: "ZeroSpoof: Deepfake & Liveness Firewall",
   tech: ["Python", "FastAPI", "Go", "Next.js", "TypeScript", "Redis", "PostgreSQL"],
   image: "/ZeroSpoof.png",
+  art: "shield",
   description:
     "Real-time deepfake and liveness firewall: a drop-in browser SDK and API that checks whether someone on a video call is a live human or a replay, photo, face-swap, virtual camera or cloned voice. Returns pass, review or fail with explainable scores and a live security dashboard.",
   highlights: [
@@ -151,13 +161,8 @@ function Highlight({ text }: { text: string }) {
 function Banner({ project, className }: { project: Project; className: string }) {
   const [ok, setOk] = useState(true);
   return (
-    <div
-      className={`relative flex items-center justify-center overflow-hidden ${className}`}
-      style={{
-        background: `radial-gradient(circle at 70% 25%, ${project.glow}55, transparent 60%), var(--tile)`,
-      }}
-    >
-      {ok ? (
+    <div className={`relative overflow-hidden ${className}`}>
+      {project.useImage && ok ? (
         <img
           src={project.image}
           alt={project.title}
@@ -166,8 +171,8 @@ function Banner({ project, className }: { project: Project; className: string })
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       ) : (
-        <div className="tile flex h-20 w-20 items-center justify-center rounded-2xl">
-          {project.icon}
+        <div className="h-full w-full transition-transform duration-500 group-hover:scale-105">
+          <ProjectArt kind={project.art} tech={project.tech} />
         </div>
       )}
     </div>
@@ -220,14 +225,12 @@ function GridCard({ project, index }: { project: Project; index: number }) {
       onClick={() => setOpen((o) => !o)}
       className="pcard group relative cursor-pointer self-start overflow-hidden text-left"
     >
-      <Banner project={project} className="h-52" />
+      <Banner project={project} className="aspect-[2/1]" />
 
       <div className="p-5">
         <div className="flex flex-wrap gap-2">
           {shown.map((t) => (
-            <span key={t} className="pchip">
-              {t}
-            </span>
+            <TechChip key={t} t={t} />
           ))}
           {extra > 0 && <span className="pchip">+{extra}</span>}
         </div>
@@ -281,13 +284,11 @@ function OrbitProjectCard({ project, onOpen }: { project: Project; onOpen: () =>
       onClick={onOpen}
       className="pcard group relative w-72 cursor-pointer overflow-hidden text-left"
     >
-      <Banner project={project} className="h-36" />
+      <Banner project={project} className="aspect-[2/1]" />
       <div className="p-4">
         <div className="flex flex-wrap gap-1.5">
           {project.tech.slice(0, 3).map((t) => (
-            <span key={t} className="pchip !px-2.5 !py-0.5 !text-[11px]">
-              {t}
-            </span>
+            <TechChip key={t} t={t} small />
           ))}
         </div>
         <h3 className="mt-3 line-clamp-2 font-display text-base font-bold leading-snug t-text">
@@ -480,7 +481,7 @@ function Projects() {
                 <HiXMark className="text-xl" />
               </button>
 
-              <Banner project={selectedProject} className="h-64" />
+              <Banner project={selectedProject} className="aspect-[2/1]" />
 
               <div className="p-6 sm:p-8">
                 <h3 className="font-display text-2xl font-bold t-text sm:text-3xl">
@@ -489,9 +490,7 @@ function Projects() {
 
                 <div className="mt-4 flex flex-wrap gap-2">
                   {selectedProject.tech.map((t) => (
-                    <span key={t} className="pchip">
-                      {t}
-                    </span>
+                    <TechChip key={t} t={t} />
                   ))}
                 </div>
 
