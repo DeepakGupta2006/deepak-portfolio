@@ -29,15 +29,15 @@ import { TechChip } from "./techColors";
 interface Project {
   title: string;
   tech: string[];
-  image: string; // only used when useImage: true
-  art: ArtKind; // banner picture drawn in code (matches every theme)
-  useImage?: boolean; // set true to show your own image instead of the drawn banner
+  image: string; 
+  art: ArtKind; 
+  useImage?: boolean; 
   description: string;
   highlights: string[];
   icon: ReactNode;
   glow: string;
   github?: string;
-  demo?: string; // optional: add  demo: "https://..."  to show a "Live Demo" button
+  demo?: string; 
 }
 
 const projects: Project[] = [
