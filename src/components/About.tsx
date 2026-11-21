@@ -111,13 +111,7 @@ function About() {
                 />
               </div>
 
-              {/* Floating 3D Corner Badge - Top Right */}
-              <div
-                style={{ transform: "translateZ(45px)" }}
-                className="card-solid absolute -top-4 -right-4 rounded-2xl px-3.5 py-2 shadow-[0_0_20px_rgba(6,182,212,0.35)]"
-              >
-                <span className="t-accent font-mono text-xs font-bold">8.0 CGPA ⭐</span>
-              </div>
+
             </div>
           </motion.div>
 

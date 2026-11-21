@@ -166,15 +166,6 @@ function Contact() {
         </motion.div>
       </div>
 
-      {/* Footer */}
-      <footer className="b-line mx-auto mt-20 flex w-full max-w-6xl flex-col items-center justify-between gap-4 border-t pt-8 font-mono text-xs t-muted sm:flex-row">
-        <p>© {new Date().getFullYear()} Deepak R. Gupta. All rights reserved.</p>
-        <p>
-          Crafted with <span className="t-accent">React</span>,{" "}
-          <span className="t-accent3">TypeScript</span> &{" "}
-          <span className="t-accent">Framer Motion</span>
-        </p>
-      </footer>
     </section>
   );
 }

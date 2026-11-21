@@ -106,7 +106,7 @@ function Resume() {
             {/* Action Buttons */}
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a
-                href="/Deepak_Raju_Gupta_Resume.pdf"
+                href="/Deepak.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass t-accent flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-semibold hover:opacity-80 transition-all"
@@ -116,7 +116,7 @@ function Resume() {
               </a>
 
               <a
-                href="/Deepak_Raju_Gupta_Resume.pdf"
+                href="/Deepak.pdf"
                 download
                 className="btn-grad flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-semibold shadow-[0_0_25px_rgba(6,182,212,0.4)] hover:scale-[1.02] transition-all"
               >

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 
-const items = ["Home", "About", "Skills", "Projects", "Resume", "Contact"];
+const items = [  " ","",    "About", "Skills", "Projects", "Resume", "Contact"];
 
 export default function Navbar() {
   const [active, setActive] = useState("Home");
@@ -60,12 +60,6 @@ export default function Navbar() {
           </a>
         ))}
 
-        <a
-          href="#contact"
-          className="btn-grad ml-1 shrink-0 rounded-full px-4 py-1.5 text-sm font-semibold"
-        >
-          Hire Me
-        </a>
 
         <ThemeToggle />
       </nav>
